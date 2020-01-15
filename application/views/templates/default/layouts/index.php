@@ -1,1 +1,0 @@
-<h4>Welcome to Moquiz Landing Page</h4>

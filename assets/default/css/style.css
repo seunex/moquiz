@@ -1,3 +1,67 @@
 body{
-    background : blue;
+    background-color: #f2f4f6;
 }
+
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
+input:focus,
+button:focus,
+button:active,
+button:hover,
+/*label:focus,*/
+.btn:active,
+.btn.active
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+    box-shadow: none !important;
+}
+
+.container-wrapper.header, .bg-light-quiz{
+    background-color: #f8f9fa;
+}
+
+
+.home-page-wrapper{
+    display: block;
+    margin-top: 80px;
+    text-align: center;
+}
+
+.homepage-left-handside,
+.homepage-right-handside{
+    display: block;
+    min-height: 400px;
+}
+
+.container-inner-landing-page{
+    margin : 30px;
+    border-radius: 20px;
+    background: #fff;
+    overflow: hidden;
+}
+
+/**Banners Styles **/
+.homepage-left-handside{
+    background-size: cover;
+    background-position: center center;
+    height: 600px;
+    -moz-border-radius-topleft: 20px;
+    -moz-border-radius-bottomleft: 20px;
+}
+
+/** login widget wrapper start **/
+.login-widget-wrapper{
+    max-width: 300px;
+    display: block;
+    margin:40px auto;
+}
+
+
+.login-widget-wrapper .form-group label{
+    font-weight: bold;
+}
+/** login widget wrapper end */

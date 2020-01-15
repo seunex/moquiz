@@ -6,7 +6,9 @@ class Home extends CI_Controller {
 	public function index()
 	{
 	    $this->load->library('layouts');
-	    $this->layouts->set_title("We are here");
-        $this-> layouts->view('templates/default/layouts/index',array(),array(),true);
+	    $this->load->language('main');
+        $this->load->helper('language');
+	    $this->layouts->set_title(lang('welcome'));
+        $this-> layouts->view('templates/default/layouts/home',array(),array(),true);
 	}
 }
