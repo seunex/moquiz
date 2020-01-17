@@ -1,3 +1,4 @@
+<?php $this->view('templates/default/login/login_social'); ?>
 <div class="login-widget-wrapper">
     <form>
         <div class="form-group">

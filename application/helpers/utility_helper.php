@@ -24,3 +24,11 @@ if ( ! function_exists('active_template()'))
     }
 }
 
+if ( ! function_exists('img_url()'))
+{
+    function img_url($path)
+    {
+        return asset_url().'default/img/'.$path;
+    }
+}
+
