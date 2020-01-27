@@ -1,15 +1,19 @@
-<?php $this->view('templates/default/login/login_social'); ?>
 <div class="login-widget-wrapper">
-    <form>
+    <form action="<?php echo key_to_url('login_auth') ?>" method="post">
+        <?php echo form_input(array('type'=>'hidden','name'=>$this->security->get_csrf_token_name(),'value'=>$this->security->get_csrf_hash())) ?>
         <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <label for="email_address"><?php echo lang("username_or_emailaddress") ?></label>
+            <?php echo form_input(array('type'=>'text','name'=>'email_address','class'=>'form-control')); ?>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-smg">Sign In </button>
+        <div class="form-group">
+            <label> <?php echo lang('password') ?> </label>
+            <?php echo form_input(array('type'=>'password','name'=>'password','class'=>'form-control')); ?>
+        </div>
+
+        <p class="forgot-me-container"><input type="checkbox" /> <?php echo lang('remember_me') ?> <span class="pull-right"> <a class="forgot-password" href=""> <?php echo lang("forgot_password") ?></a> </span> </p>
+
+        <button type="submit" class="btn btn-primary btn-smg"><?php echo lang('sign_in') ?></button>
     </form>
 </div>
+<?php $this->view('templates/default/login/login_social'); ?>

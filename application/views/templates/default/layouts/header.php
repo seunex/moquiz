@@ -17,10 +17,25 @@
             <a class="navbar-brand" href="#">
                 <img src="<?php echo asset_url() . '/default/' . 'img/logo_test.png' ?>" width="30" height="30"
                      class="d-inline-block align-top" alt="">
-                AboutMeQuiz
+                FriendsQuizzy
             </a>
 
-            <span class="navbar-text"> Languages </span>
+            <span class="top-corner-button navbar-text">
+
+                 <a style="background : <?php echo '#0288D1'; ?>; border-color: <?php echo '#0288D1'; ?>"
+                    href=""
+                    onclick="return Moquiz.toggleAccountCreateBtn(this)"
+                    data-ltext="<?php echo lang('login') ?>"
+                    data-ctext="<?php echo lang('create_new_account') ?>"
+                    class=""> <?php echo lang('create_new_account') ?>
+                  </a>
+
+                <span class="language-banner">
+                    <a href="">Language</a>
+                </span>
+
+                </span>
+            <!--<span class="navbar-text"> Languages </span>-->
         </nav>
     </div>
 </div>

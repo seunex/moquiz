@@ -1,8 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home extends CI_Controller {
-
+class Register extends CI_Controller {
 
     public function __construct()
     {
@@ -14,8 +13,7 @@ class Home extends CI_Controller {
 
     public function index()
 	{
-	    $this->layouts->set_title(lang('welcome_title'));
-        $this-> layouts->view('templates/default/account/home',array(),array(),true);
+        $this->layouts->set_title(lang('welcome_title'));
+        $this-> layouts->view('templates/default/register/main',array(),array(),true);
 	}
-
 }

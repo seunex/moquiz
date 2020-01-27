@@ -31,4 +31,23 @@ if ( ! function_exists('img_url()'))
         return asset_url().'default/img/'.$path;
     }
 }
+if ( ! function_exists('url()'))
+{
+    function url($path)
+    {
+        return base_url().$path;
+    }
+}
+
+if ( ! function_exists('url_by_key()'))
+{
+    function key_to_url($key)
+    {
+
+        if(isset( get_instance()->router->routes[$key])){
+            return base_url(). get_instance()->router->routes[$key];
+        }
+        return base_url();
+    }
+}
 

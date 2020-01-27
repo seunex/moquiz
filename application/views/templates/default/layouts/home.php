@@ -4,11 +4,18 @@
             <div class="row">
                 <div class="col homepage-left-handside" style="background-image: url('<?php echo asset_url().'default/img/banners/friend.jpg'; ?>');"></div>
                 <div class="col homepage-right-handside">
-                    <div class="home-page-wrapper">
+                    <div class="home-page-wrapper home-page-wrapper-text">
                         <h4><?php echo lang('see_who_know_you_best'); ?></h4>
                         <span><?php echo strtoupper(lang('make_a_quiz')); ?></span>
                     </div>
-                    <?php $this->view('templates/default/login/login_widget'); ?>
+                    <div class="home-page-wrapper-content">
+                        <div class="home-page-wrapper-content-login">
+                            <?php $this->view('templates/default/login/login_widget'); ?>
+                        </div>
+                        <div class="home-page-wrapper-content-signup">
+                            <?php $this->view('templates/default/register/register_widget'); ?>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
