@@ -5,9 +5,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" type="text/css" href="<?php echo asset_url() . 'default' . '/css/bootstrap.min.css' ?>"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo asset_url() . 'default' . '/css/custom.min.css' ?>"/>
     <link rel="stylesheet" type="text/css" href="<?php echo asset_url() . 'default' . '/css/overrides.css' ?>"/>
     <link rel="stylesheet" type="text/css" href="<?php echo asset_url() . 'default' . '/css/style.css' ?>"/>
+    <style>
+        body{
+            background: <?php echo config('background-color','#DCD2F0') ?>;
+        }
+        .user-side-bar-menu{
+            background : <?php echo config('side-bar-color','#581E95') ?>
+        }
+    </style>
 </head>
 <body class="overall-body">
 
@@ -22,6 +30,7 @@
 
             <span class="top-corner-button navbar-text">
 
+                <?php if(!isLoggedIn()): ?>
                  <a style="background : <?php echo '#0288D1'; ?>; border-color: <?php echo '#0288D1'; ?>"
                     href=""
                     onclick="return Moquiz.toggleAccountCreateBtn(this)"
@@ -29,6 +38,11 @@
                     data-ctext="<?php echo lang('create_new_account') ?>"
                     class=""> <?php echo lang('create_new_account') ?>
                   </a>
+                <?php else: ?>
+                    <span class="language-banner">
+                      Welcome, John
+                </span>
+                <?php endif; ?>
 
                 <span class="language-banner">
                     <a href="">Language</a>

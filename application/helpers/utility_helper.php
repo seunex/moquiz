@@ -51,3 +51,27 @@ if ( ! function_exists('url_by_key()'))
     }
 }
 
+if ( ! function_exists('isLoggedIn()'))
+{
+    function isLoggedIn()
+    {
+        $CI = get_instance();
+        $CI->load->library('session');
+        if($CI->session->userdata('id')){
+            return true;
+        }
+        return false;
+    }
+}
+
+if ( ! function_exists('config()'))
+{
+    function config($key, $default= null)
+    {
+        $CI = get_instance();
+       $settings = $CI->configs;
+        if(isset($settings[$key])) return $settings[$key];
+        return $default;
+    }
+}
+
