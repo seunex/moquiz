@@ -7,7 +7,7 @@ class Auth extends CI_Controller {
     {
         parent::__construct();
         $this->load->library(array('form_validation','layouts','session'));
-        $this->load->model(array('register_model','general_model'));
+        $this->load->model(array('user_model','general_model'));
         $this->load->helper('language');
         $this->load->language('main');
         $this->load->database();
@@ -35,8 +35,10 @@ class Auth extends CI_Controller {
                 'email_address'=>$this->input->post('email_address'),
                 'password'=>md5($this->input->post('password')),
             );
-            $id = $this->register_model->insert($data);
+            $id = $this->user_model->insert($data);
             $this->session->set_userdata('id',$id);
+            $user = $this->user_model->find_user($id);
+            $this->session->set_userdata('user',$user);
             redirect('home');
         }else{
             $this->layouts->set_title(lang('welcome_title'));

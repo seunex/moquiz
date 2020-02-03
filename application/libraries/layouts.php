@@ -36,8 +36,9 @@ class Layouts
     }
 
 
-    public function view($view_name, $layouts = array(), $params = array(), $default = false)
+    public function view($view_name, $layouts = array(), $params = array(), $default = false, $sidemenu = false, $sidemenu_param = array())
     {
+        //if we want to load widgets such as ads
         if(is_array($layouts) and $layouts){
             foreach ($layouts as $layout_key=>$layout){
                 $params[$layout_key] = $this->CI->load->view($layout);
@@ -53,7 +54,15 @@ class Layouts
             $this->CI->load->view('templates/default/layouts/header',$header_param);
 
             //load the actual content
-            $this->CI->load->view($view_name);
+            if($sidemenu){
+                //return the menu
+                $content = $this->CI->load->view($view_name,$params,true);
+                $sidemenu_param['content'] = $content;
+                $this->CI->load->view('templates/default/account/menu',$sidemenu_param);
+            }else{
+                $this->CI->load->view($view_name,$params);
+            }
+
 
             //load the footer
             $this->CI->load->view("templates/default/layouts/footer");

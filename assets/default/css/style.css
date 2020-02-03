@@ -1,4 +1,4 @@
-body{
+body {
     background-color: #f2f4f6;
 }
 
@@ -11,42 +11,54 @@ input:focus,
 button:focus,
 button:active,
 button:hover,
-/*label:focus,*/
+    /*label:focus,*/
 .btn:active,
-.btn.active
-{
-    outline:0px !important;
-    -webkit-appearance:none;
+.btn.active {
+    outline: 0px !important;
+    -webkit-appearance: none;
     box-shadow: none !important;
 }
 
-.container-wrapper.header, .bg-light-quiz{
-    background-color: #f8f9fa;
+.centered {
+    text-align: center;
 }
 
+.bold {
+    font-weight: bold;
+}
 
-.home-page-wrapper{
+.container-wrapper.header, .bg-light-quiz {
+    background-color: #fff;
+}
+
+.container-wrapper.header {
+    height: 60px;
+    position: relative;
+
+}
+
+.home-page-wrapper {
     display: block;
     margin-top: 50px;
     text-align: center;
 }
 
 .homepage-left-handside,
-.homepage-right-handside{
+.homepage-right-handside {
     display: block;
     min-height: 400px;
     position: relative;
 }
 
-.container-inner-landing-page{
-    margin : 30px;
+.container-inner-landing-page {
+    margin: 30px;
     border-radius: 20px;
     background: #fff;
     overflow: hidden;
 }
 
 /**Banners Styles **/
-.homepage-left-handside{
+.homepage-left-handside {
     background-size: cover;
     background-position: center center;
     height: 600px;
@@ -54,60 +66,63 @@ button:hover,
     -moz-border-radius-bottomleft: 20px;
 }
 
-.home-page-wrapper-content{
+.home-page-wrapper-content {
     max-width: 300px;
     margin: 0 auto;
 }
 
 /** login widget wrapper start **/
-.login-widget-wrapper{
+.login-widget-wrapper {
     display: block;
-    margin:30px auto;
+    margin: 30px auto;
 }
 
 
-.login-widget-wrapper .form-group label{
+.login-widget-wrapper .form-group label {
     font-weight: bold;
 }
+
 /** login widget wrapper end */
 
 /** Social Button Styling **/
-.social-login-wrapper{
+.social-login-wrapper {
     margin-top: 40px;
     display: block;
     margin: 20px auto;
 }
-.social-login-wrapper .sl-row{
+
+.social-login-wrapper .sl-row {
     padding: 5px;
     border-radius: 5px;
     margin-bottom: 10px;
 }
-.social-login-wrapper .sl-row img{
+
+.social-login-wrapper .sl-row img {
     height: 30px;
-    width : 30px;
+    width: 30px;
 }
 
-.social-login-wrapper .sl-row a{
+.social-login-wrapper .sl-row a {
     display: block;
     font-size: 14px;
 }
 
-.social-login-wrapper .sl-row .sl-text-wrapper{
+.social-login-wrapper .sl-row .sl-text-wrapper {
     width: 80%;
     text-align: center;
     display: inline-block;
 }
 
-.social-login-wrapper .sl-row .sl-text{
-    color : #fff;
+.social-login-wrapper .sl-row .sl-text {
+    color: #fff;
 }
 
-.social-login-wrapper .container{
+.social-login-wrapper .container {
     padding: 0;
 }
 
 /** facebook **/
-.social-login-wrapper .sl-row.sl-facebook{
+.social-login-wrapper .sl-row.sl-facebook {
     border-top-color: #2274B9 !important;
     border-bottom-color: #2274B9 !important;
     background-color: #2274B9 !important;
@@ -115,7 +130,7 @@ button:hover,
 }
 
 .social-login-wrapper .sl-row.sl-tw {
-    border-top-color: #4AA5E1!important;
+    border-top-color: #4AA5E1 !important;
     border-bottom-color: #4AA5E1 !important;
     background-color: #4AA5E1 !important;
     color: #FFFFFF !important;
@@ -128,51 +143,52 @@ button:hover,
     color: #555 !important;
 }
 
-.social-login-wrapper .sl-row.sl-google .sl-text{
+.social-login-wrapper .sl-row.sl-google .sl-text {
     color: #555;
 }
 
 /** Divider text line **/
-.divider-with-text{
+.divider-with-text {
     position: relative;
     display: block;
     text-align: center;
 }
 
-.divider-with-text .divider-with-text-line{
+.divider-with-text .divider-with-text-line {
     width: 100%;
     height: 1px;
     display: block;
     background: #555;
 }
 
-.divider-with-text .d-text{
+.divider-with-text .d-text {
     position: relative;
     background: #fff;
     top: -10px;
     z-index: 20;
     padding: 10px;
 }
+
 /** forgot me container**/
-.forgot-me-container{
+.forgot-me-container {
     font-weight: bold;
 }
 
 /** Top corner login button **/
 
-.top-corner-button >  a{
+.top-corner-button > a {
     border-radius: 15px;
-    padding:8px 15px;
-    border:1px solid  #ccc;
+    padding: 8px 15px;
+    border: 1px solid #ccc;
     color: #fff !important;
 }
 
 /** language **/
-.language-banner{
+.language-banner {
     margin-left: 10px;
 }
 
-.home-page-wrapper-content-signup{
+.home-page-wrapper-content-signup {
     display: none;
 }
 
@@ -210,20 +226,22 @@ button:hover,
 
 /** Register Page **/
 
-.main-register-wrapper{
+.main-register-wrapper {
     max-width: 400px;
     margin: 0 auto;
 }
 
 /** account css **/
-.user-home-wrapper{
+.user-home-wrapper {
     display: block;
-    min-height: 600px;
+    min-height: 700px;
     background: #fff;
     margin: 40px;
-    overflow:hidden;
+    overflow: hidden;
     position: relative;
     border-radius: 10px;
+    -webkit-box-shadow: 0 0 10px #fff;
+    box-shadow: 0 0 10px #aaa;
 }
 
 .user-side-bar-menu {
@@ -231,16 +249,386 @@ button:hover,
     display: inline-block;
     height: 100%;
     position: absolute;
-    color : #fff;
+    color: #fff;
 }
 
-.user-side-bar-menu li{
+.user-side-bar-menu li {
     display: block;
     text-align: center;
-    font-size: 20px
+    font-size: 12px;
+    border-bottom: 1px solid #fff;
+    padding: 20px;
 }
 
-.user-home-content{
+.user-side-bar-menu li:last-child {
+    border-bottom: none;
+}
+
+.user-side-bar-menu li svg {
+    text-align: center;
+    font-size: 50px;
+    display: block;
+    margin: 0 auto;
+    height: 58px;
+    width: 58px;
+    padding: 0px;
+}
+
+.user-side-bar-menu li a {
+    color: #fff !important;
+    display: block;
+}
+
+.user-side-bar-menu li.active a {
+    color: #00BCD6 !important;
+}
+
+.user-side-bar-menu li.active svg {
+    color: #00BCD6;
+    padding: 2px;
+}
+
+.user-home-content {
     margin-left: 200px;
     padding: 10px;
+}
+
+/** no quiz home **/
+.title-noquiz-wrapper {
+    display: block;
+    padding: 20px;
+    text-align: center;
+    margin: 40px auto;
+}
+
+.title-noquiz-wrapper svg {
+    margin: 20px auto;
+    height: 60px;
+    width: 60px;
+
+}
+
+.title-noquiz-wrapper .title-noquiz a {
+    font-size: initial;
+    padding-bottom: 2px;
+    border-bottom: 1px dotted #ccc;
+}
+
+/** Create Quiz **/
+.create-quiz-box{
+    position: relative;
+}
+.create-quiz-wrapper {
+    margin: 40px auto;
+    padding: 20px;
+    margin-bottom: 0px;
+}
+
+.create-quiz-wrapper .create-quiz-header {
+    text-align: center;
+    font-size: 16px;
+}
+
+.create-quiz-wrapper .create-quiz-header img {
+    max-height: 50px;
+}
+
+.create-quiz-wrapper .create-quiz-header span {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.create-quiz-wrapper .quiz-title-input {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 40px;
+    font-size: 24px !important;
+    text-align: center;
+}
+
+.create-quiz-wrapper .quiz-title-input:focus,
+.create-quiz-wrapper .quiz-title-input:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border: 1px solid #ced4da !important;
+}
+
+.create-quiz-wrapper .submit-q-title {
+    text-align: center;
+    font-size: 24px;
+    display: block;
+    margin: 0 auto;
+}
+
+/** Question styling **/
+.quiz-title-dynamic {
+    text-align: center;
+}
+
+.quiz-question-row .question-image-area,
+.answer-image-area {
+    height: 150px;
+    background: #f8f8f8;
+    border: 3px dotted #ccc;
+    margin: 30px auto;
+    text-align: center;
+    display: none;
+    position: relative;
+    /*max-width: 400px;*/
+}
+
+.quiz-question-row .question-image-area .image-choose-text,
+.answer-image-area .image-choose-text {
+    display: block;
+    margin-top: 5px;
+}
+
+.quiz-question-row .question-image-area svg,
+.answer-image-area svg {
+    height: 40px;
+    width: 40px;
+    margin-top: 40px;
+    cursor: pointer;
+}
+
+.quiz-question-row .question-count {
+    text-align: center;
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 7px;
+}
+
+.quiz-question-row .question-count-number {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.quiz-question-row .question-image-area input {
+    display: none;
+}
+
+.quiz-question-row .d-text {
+    border: 2px solid #555;
+    border-radius: 20px;
+}
+
+.quiz-question-row .divider-with-text .divider-with-text-line{
+    height: 2px;
+}
+
+.quiz-question-row .divider-with-text .d-text{
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.question-row-input input {
+    display: inline;
+    max-width: 400px;
+}
+
+.question-row-input .possible-questions {
+    margin-left: 10px;
+    float: right;
+}
+
+.question-row-input .possible-questions select {
+    width: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+/** Answers Box **/
+.a-input-wrapper {
+    position: relative;
+}
+
+.a-input-wrapper .lhs {
+    width: 300px;
+    overflow: hidden;
+}
+
+.answer-box-row .a-input-wrapper {
+    margin-bottom: 20px;
+}
+
+/*Image Answers */
+.a-input-wrapper .answer-image-select {
+    background: #555;
+    text-align: center;
+}
+
+.a-input-wrapper .answer-image-select svg {
+    margin-top: 40px;
+    background: #fff;
+    border-radius: 100%;
+}
+
+.answer-image-area {
+    display: block;
+    margin: 0;
+    border-bottom: none;
+    /*border-radius: 25px;*/
+}
+
+.a-input-wrapper .switch {
+    margin-top: 20%;
+}
+
+/** Remove Answer **/
+.remove-answer-box {
+    position: absolute;
+    right: 20px;
+    top: 5px;
+    z-index: 99;
+}
+
+.remove-answer-box svg {
+    color: red;
+}
+
+/*Image Preview */
+
+.question-image-area img,
+.answer-image-area img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-height: 100%;
+    max-width: 100%;
+    z-index: 10;
+    margin: 0 auto;
+    height: 50px;
+    width: 50px;
+}
+
+.quiz-buttons-submit-prev {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.create-quiz-wrapper .submit-q-next,
+.create-quiz-wrapper .submit-q-prev,
+.create-quiz-wrapper .submit-save-quiz {
+    text-align: center;
+    font-size: 14px;
+    display: inline-block;
+}
+
+.create-quiz-wrapper .submit-q-prev,
+.create-quiz-wrapper .submit-save-quiz {
+    display: none;
+}
+
+/** Rotate Icon **/
+
+.form-loader {
+    display: none;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    opacity: 0.5;
+    background: #fff;
+    z-index: 99;
+}
+
+.form-loader svg {
+    font-size: 30px;
+    display: block;
+    margin: 50% auto;
+    height: 50px;
+    width: 50px;
+}
+
+.loading-icon {
+    -webkit-animation: rotation 2s infinite linear;
+}
+
+@-webkit-keyframes rotation {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(359deg);
+    }
+}
+
+
+/** Swith on an off**/
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #00B746;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #00B746;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/*mo added to */
+input:checked + .slider.unselect:before {
+    -webkit-transform: translateX(0px);
+    -ms-transform: translateX(0px);
+    transform: translateX(0px);
+}
+
+input:checked + .slider.unselect {
+    background-color: #ccc;;
+}
+
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
 }

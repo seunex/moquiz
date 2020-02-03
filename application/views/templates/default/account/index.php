@@ -1,16 +1,11 @@
-<div class="container">
-    <div class="user-home-wrapper">
-        <div class="user-side-bar-menu">
-            <ul>
-                <li>Home</li>
-                <li>My Profile</li>
-                <li>Score Board</li>
-                <li>Logout</li>
-                <li><i class="icon ion-md-heart"></i></li>
-            </ul>
+<div class="user-home-content">
+    <?php if ($quiz): ?>
+        <h2>Display Quiz</h2>
+    <?php else: ?>
+        <div class="title-noquiz-wrapper">
+            <h6 class="title-noquiz">You have no Quiz Yet! <a href="<?php echo site_url('quiz/create') ?>"> Create Quiz
+                    Now </a></h6>
+            <i data-feather="cloud-snow"></i>
         </div>
-        <div class="user-home-content">
-            <h6 class="title-noquiz">You have no Quiz Create Yet! Create Quiz Now </h6>
-        </div>
-    </div>
+    <?php endif; ?>
 </div>

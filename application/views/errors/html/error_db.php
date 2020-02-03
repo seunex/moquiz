@@ -15,6 +15,9 @@ body {
 	margin: 40px;
 	font: 13px/20px normal Helvetica, Arial, sans-serif;
 	color: #4F5155;
+
+    max-width: 400px;
+    margin : 40px auto;
 }
 
 a {
@@ -55,7 +58,7 @@ p {
 }
 </style>
 </head>
-<body>
+<body>  
 	<div id="container">
 		<h1><?php echo $heading; ?></h1>
 		<?php echo $message; ?>
