@@ -62,3 +62,4 @@ $route['register'] = 'register';
 //home
 $route['home'] = 'home';
 $route['create_quiz'] = 'quiz/create';
+$route['share_quiz'] = 'quiz/share';

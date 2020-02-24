@@ -10,22 +10,24 @@
             <div class="form-loader">
                 <i class="loading-icon" data-feather="loader"></i>
             </div>
-            <div class="quiz-title-wrapper" style="display: none">
+            <div class="quiz-title-wrapper" style="display: block">
                 <div class="create-quiz-header">
-                    <span> Make A Quiz</span>
-                    <span>Send it to your Friends </span>
-                    <span> See who knows you Best! </span>
-                    <img src="https://twemoji.maxcdn.com/2/svg/1f61c.svg" alt="😜"/>
+                    <span> <?php echo lang('make_a_quiz') ?></span>
+                    <span><?php echo lang('send_to_your_friends'); ?></span>
+                    <span><?php echo lang('see_who_knows_you_best'); ?> </span>
+                    <img src="<?php echo asset_url('default/img/emoticons/winking_eye.svg') ?>" alt="😜"/>
                 </div>
-                <input type="text" autocomplete="off" class="form-control form-control-lg quiz-title-input"
-                       placeholder="Your Quiz Title" name="title"/>
-                <button class="btn btn-info btn-lg submit-q-title"
+                <input type="text"
+                       data-errmsg="<?php echo lang("error_question_title_required"); ?>"
+                       autocomplete="off" id="quiz-title-input" class="form-control form-control-lg quiz-title-input"
+                       placeholder="<?php echo lang('your_quiz_title'); ?>" name="title"/>
+                <button class="btn btn-info btn-lg submit-q-title" type="button" onclick="return Moquiz.saveQuestion()"
                         style="background: <?php echo config('btn-action-color', '#FF088F'); ?>">
                     Add Questions <i data-feather="chevrons-right"></i>
                 </button>
             </div>
-            <div class="quiz-question-create-box">
-                <h4 class="quiz-title-dynamic"> My First Quiz </h4>
+            <div class="quiz-question-create-box" style="display: none;">
+                <h4 class="quiz-title-dynamic"><?php echo lang('my_quiz') ?> </h4>
                 <div class="quiz-question-row">
                     <span class="question-count" data-count="1"><?php echo lang('question') ?> <span
                                 class="question-count-number">#1</span></span>
@@ -39,7 +41,7 @@
                                            class="form-control"/>
 
                                     <span class="possible-questions">
-                                <a href=""> Need a Hand? <i data-feather="sun"></i></a>
+                                <a href=""> <?php echo lang('need_a_hand'); ?> <i data-feather="sun"></i></a>
                                 <span class="pqs">
                                     <?php $this->view("templates/default/snippets/qideas") ?>
                                 </span>

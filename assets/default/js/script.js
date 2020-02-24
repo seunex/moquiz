@@ -22,16 +22,47 @@ var Moquiz = {
        return false;
     },
 
+    hideElement : function(elem){
+        $(elem).hide();
+    },
+
+    showElement : function(elem){
+        $(elem).show();
+    },
+
+    saveQuestion : function(){
+      let q = $('#quiz-title-input');
+      let errmsg  = $(q).data('errmsg');
+      if(q.val() == '') return notifyError(errmsg);
+      Moquiz.hideElement('.quiz-title-wrapper');
+      Moquiz.showElement('.quiz-question-create-box');
+      return false;
+    },
+
+    redirect : function(url){
+        window.location.href = url;
+    },
     saveQuiz : function(){
-        var frm = $('#submit-quiz-form');
+        let frm = $('#submit-quiz-form');
+        let loader = $('.form-loader');
+        loader.fadeIn();
         frm.ajaxSubmit({
             url : frm.attr('action'),
             method : 'POST',
             success : function (data) {
-                console.log(data)
+                //console.log(data)
+                let rsp = jQuery.parseJSON(data);
+                if(rsp.status == 0){
+                    notifyError(rsp.message);
+                }else{
+                    notifySuccess(rsp.message);
+                   Moquiz.redirect(rsp.url)
+                }
+                loader.hide();
             },
 
             error : function (data) {
+                loader.hide();
                 notifyError(this.general_error_message);
             }
 
@@ -195,6 +226,16 @@ function notifyError(m,t){
     })
 }
 
+function show_iframe(m,img){
+    return Swal.queue([{
+        title: 'Embed on Website',
+        //confirmButtonText: 'Show my public IP',
+        //text: 'Your public IP will be received ' + 'via AJAX request',
+        input: 'textarea',
+        inputValue : '<div><a target="_blank" href="'+m+'" style="height: 200px;width : 200px; overflow : hidden"><img style="height: 100%; width: 100%" src="'+img+'" /></a> </div>',
+
+    }])
+}
 function notifySuccess(m, t){
     Swal.fire({
         position: 'bottom-left',
@@ -291,4 +332,57 @@ $(function(){
             e.stopPropagation();
         }
     });
+
+    //share
+    $(document).on('click','.share-action',function(){
+       let obj = $(this);
+       let t = obj.data('type');
+       let url = $("#quiz-link-input").val();
+       //mailto:?subject=Take%20My%20Quiz&body=Take%20my%20Quiz:%3CBR%3Ehttp%3A%2F%2Fwww.quizyourfriends.com/take-quiz.php?id=2002221301122793%26eml%26%3CBR%3E%3CBR%3ESee%20how%20well%20you%20can%20score!
+       //let url = 'https://stackoverflow.com/questions/9120539/facebook-share-link-without-javascript';
+       let title = $("#quiz-link-input").data('title');
+       if(t == 'copy'){
+           let success_msg = obj.data('msg');
+           /* Get the text field */
+           var copyText = document.getElementById("quiz-link-input");
+
+           /* Select the text field */
+           copyText.select();
+           copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+           /* Copy the text inside the text field */
+           document.execCommand("copy");
+
+           notifySuccess('Link Copied');
+       }else if(t == 'message'){
+           return window.open('sms:&body='+ $('#content-to-share').val(), '_blank');
+       }
+       else if(t == 'email'){
+           let sbj = obj.data('sub');
+           return window.open('mailto:?subject='+sbj+'&body='+encodeURI($('#content-to-share').val()), '_blank');
+       }
+       else if(t == 'facebook'){
+           return window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURI(url), title, 'width = 500, height = 500, scrollbars = yes')
+       }
+       else if(t == 'twitter'){
+           return window.open('https://twitter.com/share?url='+encodeURI(url), title, 'width = 500, height = 500, scrollbars = yes')
+       }
+       else if(t == 'whatsapp'){
+           //whatsapp://send?text=The text to share!
+           return window.open('https://api.whatsapp.com/send?text='+ encodeURI($('#content-to-share').val()), title, 'width = 500, height = 500, scrollbars = yes')
+       } else if(t == 'embed'){
+           return show_iframe(url,obj.data('img'));
+           return true;
+       }
+       return false;
+    });
 });
+
+
+
+
+
+
+
+
+

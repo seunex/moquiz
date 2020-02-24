@@ -1,9 +1,9 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 if (!function_exists('asset_url()')) {
-    function asset_url()
+    function asset_url($str = null)
     {
-        return base_url() . 'assets/';
+        return base_url() . 'assets/'.$str;
     }
 }
 
@@ -45,6 +45,38 @@ if (!function_exists('url_by_key()')) {
     }
 }
 
+if (!function_exists('file_isset()')) {
+    function file_isset($fileName)
+    {
+
+        if (isset($_FILES[$fileName])) {
+            return true;
+        }
+        return false;
+    }
+}
+
+if (!function_exists('post_isset()')) {
+    function post_isset($key)
+    {
+
+        if (isset($_POST[$key])) {
+            return true;
+        }
+        return false;
+    }
+}
+if (!function_exists('get_isset()')) {
+    function get_isset($key)
+    {
+
+        if (isset($_GET[$key])) {
+            return true;
+        }
+        return false;
+    }
+}
+
 if (!function_exists('config()')) {
     function config($key, $default = null)
     {
@@ -83,3 +115,28 @@ function get_user()
     return false;
 }
 
+function find_user($id){
+    $CI = get_instance();
+    $CI->load->model('user_model');
+    $user = $CI->user_model->find_user($id);
+    return $user;
+}
+function get_session($key,$default = null)
+{
+    $CI = get_instance();
+    $CI->load->library('session');
+    $value = $CI->session->userdata($key);
+    if(!$value) return $default;
+    return false;
+}
+
+function get_user_name($user = array()){
+    $u = ($user) ? $user : get_user();
+    return $u['username'];
+}
+
+function get_avatar($user = array()){
+    $u = ($user) ? $user : get_user();
+    if($u['avatar']) return asset_url($u['avatar']);
+    return asset_url('default/img/av.png');
+}
