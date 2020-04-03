@@ -11,9 +11,9 @@
                 <br/>
                 <div class="divider-with-text">
                     <span class="divider-with-text-line" style="background: <?php echo config('side-bar-color','#581E95') ?>"></span>
-                    <span class="d-text" style="border-color :<?php echo config('side-bar-color','#581E95') ?> "> <b> <?php echo 'Question 1' ?> </b></span>
+                    <span class="d-text" style="border-color :<?php echo config('side-bar-color','#581E95') ?> "> <b> <?php echo 'Question ' ?><span class="q-start-count">1</span> </b></span>
                 </div>
-            <?php $this->view('templates/default/quiz/list/questions',array('questions'=> $questions)); ?>
+            <?php $this->view('templates/default/quiz/list/questions',array('questions'=> $questions,'quiz'=>$quiz)); ?>
             <div class="form-holder-for-just-name" style="display: none;">
                 <div class="form-group">
                     <label class="label-input-name"><?php echo lang('your_name') ?></label>

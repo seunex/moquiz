@@ -256,7 +256,7 @@ function elem_fade_toggle(e){
 
 function help_me_ideas(d){
     let text = $(d).val();
-    $('.question-row-input input').val(text);
+    $('.q-question-answer-wrapper.active .question-row-input input').val(text);
 }
 
 
@@ -379,6 +379,94 @@ $(function(){
 });
 
 
+//Taking Question Next and Previous
+$(document).on('click','.btn-start-action-next',function(){
+    let obj = $(this);
+    let submit_button = $('.btn-start-action-submit');
+    let active_object = $('.question-each-box.active');
+    let active_index = $(active_object).data('idx');
+    let next_index = parseInt(active_index) + 1;
+    let next_object = $('.question-each-box-index-'+next_index);
+    let success = false;
+    if(next_object.length){
+        //Before moving to the next
+        //check if the user have choose an answer
+        active_object.find('.pretty').each(function(index){
+            let elem = $(this);
+            if(elem.find('input').prop('checked') === true){
+                success = true;
+                //return false;
+            }
+        });
+        if(success){
+            active_object.removeClass('active').hide();
+            //next_object.addClass('active').slideToggle();
+            next_object.addClass('active').fadeIn('fast');
+            $('.q-start-count').html(next_index);
+            //next next
+            if(!$('.question-each-box-index-'+ (next_index + 1)).length){
+                //there is no next qustion
+                obj.hide();
+                submit_button.fadeIn('fast');
+            }
+        }else{
+            notifyError(obj.data('canswer'))
+        }
+    }
+    //update the indext showing to user
+    //console.log('alaye jor jor');
+   return false;
+});
+//previous question
+$(document).on('click','.btn-start-action-prev',function(){
+    let obj = $(this);
+    let next_button = $('.btn-start-action-next');
+    let submit_button = $('.btn-start-action-submit');
+    let active_object = $('.question-each-box.active');
+    let active_index = $(active_object).data('idx');
+    let prev_index = parseInt(active_index) - 1;
+    let prev_object = $('.question-each-box-index-'+prev_index);
+    if(prev_object.length){
+        submit_button.hide();
+        next_button.fadeIn('fast');
+        active_object.removeClass('active').hide();
+        //prev_object.addClass('active').slideToggle();
+        prev_object.addClass('active').fadeIn('fast');
+        $('.q-start-count').html(prev_index);
+    }
+    //update the indext showing to user
+    console.log('alaye jor jor');
+   return false;
+});
+
+//save question
+$(document).on('click','.btn-start-action-submit',function(){
+    let frm = $('#take-quiz-form');
+    let loader = $('.form-loader');
+    loader.fadeIn();
+    frm.ajaxSubmit({
+        url : frm.attr('action'),
+        method : 'POST',
+        success : function (data) {
+            //console.log(data)
+            let rsp = jQuery.parseJSON(data);
+            if(rsp.status == 0){
+                notifyError(rsp.message);
+            }else{
+                notifySuccess(rsp.message);
+                Moquiz.redirect(rsp.url)
+            }
+            loader.hide();
+        },
+
+        error : function (data) {
+            loader.hide();
+            notifyError(this.general_error_message);
+        }
+
+
+    });
+});
 
 
 

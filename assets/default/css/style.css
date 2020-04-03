@@ -747,6 +747,11 @@ input:checked + .slider.unselect {
     margin-top: 20px;
 }
 
+.question-each-box.not-active,
+.btn-start-action-submit{
+    display: none;
+}
+
 .answer-row-text-image{
     max-width: 300px;
     margin: 0 auto;
@@ -768,4 +773,9 @@ input:checked + .slider.unselect {
     height: 120px;
     width: 120px;
     display: block;
+    margin-bottom: 10px;
+}
+
+#take-quiz-form{
+    position: relative;
 }

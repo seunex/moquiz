@@ -44,4 +44,19 @@ class Quiz_model extends CI_Model{
         $query = $this->db->query("SELECT * FROM quiz_answers WHERE question_id='{$qid}'");
         return $query->result_array();
     }
+
+    function save_friends_answers($arr){
+        $this->db->insert('quiz_friend_answers',$arr);
+        return $this->db->insert_id();
+    }
+
+    function quiz_result_by_question($arr){
+        $this->db->insert('quiz_result_by_question',$arr);
+        return $this->db->insert_id();
+    }
+
+    function quiz_result_overall($arr){
+        $this->db->insert('quiz_result_overall',$arr);
+        return $this->db->insert_id();
+    }
 }

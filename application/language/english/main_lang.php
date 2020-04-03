@@ -51,3 +51,7 @@ $lang['to_more_friends'] = 'to More Friends';
 $lang['send_quiz'] = 'Send Quiz';
 $lang['prev'] = 'Prev';
 $lang['next'] = 'Next';
+$lang['save'] = 'Save';
+$lang['submit'] = 'Submit';
+$lang['choose-answer'] = 'Choose Answer to move to the next question';
+

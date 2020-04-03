@@ -19,7 +19,7 @@ function get_question_answers($question){
 
 function answers_type($answers){
     $default = 'radio';
-    return $default;
+    //return $default;
     //return 'checkbox';
     $cc = 0; //correct count;
     foreach ($answers as $a){
@@ -29,4 +29,16 @@ function answers_type($answers){
     }
     if($cc > 1) $default = 'checkbox';
     return $default;
+}
+
+function is_question_answer_correct($answer, $databaseAnswer){
+    $is_correct =  false;
+    foreach ($databaseAnswer as $a){
+        if ($databaseAnswer['id'] == $answer){
+            if($a['answer'] == 1){
+                $is_correct =  true;
+            }
+        }
+    }
+    return $is_correct;
 }

@@ -10,7 +10,7 @@ class Quiz extends CI_Controller
         parent::__construct();
         $this->load->library(array('layouts', 'session'));
         $this->load->language('main');
-        $this->load->helper(array('language','quiz'));
+        $this->load->helper(array('language', 'quiz'));
         $this->load->database();
         //load settings now
         $this->load->model(array('general_model', 'quiz_model'));
@@ -21,6 +21,7 @@ class Quiz extends CI_Controller
     {
 
         if (post_isset('title')) {
+            //echo '</pre>', print_r($_POST), '</pre>';die();
             //echo $this->input->post('title');
             $quiz_title = $this->input->post('title');
             $qid = $this->quiz_model->add_quiz_details(array(
@@ -39,8 +40,8 @@ class Quiz extends CI_Controller
             $config['max_height'] = 768;
 
 
-            $path0 = 'storage/uploads/' . $qid . '/' ;
-            $path = './storage/uploads/' . $qid . '/' ;
+            $path0 = 'storage/uploads/' . $qid . '/';
+            $path = './storage/uploads/' . $qid . '/';
             if (!is_dir($path)) {
                 @mkdir($path, 0777, true);
                 $file = @fopen($path . 'index.html', 'x+');
@@ -53,7 +54,7 @@ class Quiz extends CI_Controller
             //$questios = qimage_2; //question_2
             $i = 1;
             while (post_isset('question_' . $i)) {
-                $questio_image_file_name = md5($quiz_title . time().$i);
+                $questio_image_file_name = md5($quiz_title . time() . $i);
                 $question_text = $this->input->post('question_' . $i);
                 $question_file_name = 'qimage_' . $i;
                 $question_check = false; //checking if we have the right questions
@@ -87,10 +88,10 @@ class Quiz extends CI_Controller
                         //if the upload is successful
                         $question_check = true;
                         $file_data = $this->upload->data();
-                        $qnn = $path.$questio_image_file_name.$file_data['file_ext']; //question image new name
-                        if(rename($path.$file_data['file_name'],$qnn)){
-                            $question_data['image'] = $path0 . $questio_image_file_name.$file_data['file_ext'];
-                        }else{
+                        $qnn = $path . $questio_image_file_name . $file_data['file_ext']; //question image new name
+                        if (rename($path . $file_data['file_name'], $qnn)) {
+                            $question_data['image'] = $path0 . $questio_image_file_name . $file_data['file_ext'];
+                        } else {
                             //if we are unable to rename, use the preious
                             $question_data['image'] = $path0 . $file_data['file_name'];
                         }
@@ -124,17 +125,17 @@ class Quiz extends CI_Controller
                             $answer_digit = $match[1]; //1, 2, 4 e.t.c
                             $answer_text_name = 'answer_text_' . $i . '_' . $answer_digit;
                             $answer_image_name = 'answer_image_' . $i . '_' . $answer_digit;
-                            $answer_image_file_name = md5($answer_image_name.time());
+                            $answer_image_file_name = md5($answer_image_name . time());
                             if ($this->input->post($answer_text_name)) {
                                 $answer_data['txt'] = $this->input->post($answer_text_name);
                             }
                             if ($this->upload->do_upload($answer_image_name)) {
                                 $file_data = $this->upload->data();
 
-                                $ann = $path.$answer_image_file_name.$file_data['file_ext']; //question image new name
-                                if(rename($path.$file_data['file_name'],$ann)){
-                                    $answer_data['image'] = $path0 . $answer_image_file_name.$file_data['file_ext'];
-                                }else{
+                                $ann = $path . $answer_image_file_name . $file_data['file_ext']; //question image new name
+                                if (rename($path . $file_data['file_name'], $ann)) {
+                                    $answer_data['image'] = $path0 . $answer_image_file_name . $file_data['file_ext'];
+                                } else {
                                     //if we are unable to rename, use the preious
                                     $answer_data['image'] = $path0 . $file_data['file_name'];
                                 }
@@ -154,10 +155,10 @@ class Quiz extends CI_Controller
             //we are done with the questions
             if ($i > 0) {
                 //save the quiz session
-                $this->session->set_userdata('quiz_id',$qid);
-                echo json_encode(array('status' => 1, 'message' => 'successful','url'=>site_url('quiz/share')));
+                $this->session->set_userdata('quiz_id', $qid);
+                echo json_encode(array('status' => 1, 'message' => 'successful', 'url' => site_url('quiz/share')));
                 return;
-            }else{
+            } else {
                 echo json_encode(array('status' => 0, 'message' => lang('error_occured_adding_question')));
                 return;
             }
@@ -171,22 +172,139 @@ class Quiz extends CI_Controller
 
     }
 
-    public function share(){
+    public function share()
+    {
         if (!isLoggedIn()) redirect(site_url());
         //if (!get_session('quiz_id')) redirect(site_url());
         $this->layouts->set_title(lang('share_your_quiz'));
         $last_created_quiz = $this->session->userdata('quiz_id');
         $quiz = $this->quiz_model->get($last_created_quiz);
-        $this->layouts->view('templates/default/quiz/share', array(), array('quiz'=>$quiz), true, true, array('active' => 'create-quiz'));
+        $this->layouts->view('templates/default/quiz/share', array(), array('quiz' => $quiz), true, true, array('active' => 'create-quiz'));
     }
 
-    public function start($slug){
+    public function start($slug)
+    {
         $quiz = $this->quiz_model->get($slug);
-        if(!$quiz) return redirect(site_url());
+        if (!$quiz) return redirect(site_url());
         $this->layouts->set_title(lang('take_quiz'));
         $user = find_user($quiz['user_id']);
         $questions = $this->quiz_model->get_questions($quiz['id']);
-        return $this->layouts->view('templates/default/quiz/start', array(), array('quiz'=>$quiz,'user'=>$user,'questions'=>$questions), true, false, array('active' => 'create-quiz'));
+        return $this->layouts->view('templates/default/quiz/start', array(), array('quiz' => $quiz, 'user' => $user, 'questions' => $questions), true, false, array('active' => 'create-quiz'));
+    }
+
+    function take()
+    {
+        if (post_isset('ajax')) {
+            //echo '</pre>', print_r($_POST), '</pre>';die();
+            //echo $this->input->post('title');
+            $quiz_id = $this->input->post('quiz_id');
+            $answers = $this->input->post('answer');
+            $user_id = (int)user_id();
+            $question_count = 0;
+            $correct_questions_count = 0;
+            $time = time();
+
+            if (is_array($answers)) {
+                $question_count = count($answers);
+                foreach ($answers as $q_id => $answer) {
+                    $arr = array();
+                    $arr['time'] = $time;
+                    $arr['quiz_id'] = $quiz_id;
+                    $arr['question_id'] = $q_id;
+                    $arr['user_id'] = $user_id;
+                    $answer_arr = get_question_answers($q_id);
+
+                    //correct answer count expected
+                    //this is number of the correct
+                    //answers expected for this question
+                    $expected_correct_answer_count = 0;
+                    foreach ($answer_arr as $a) {
+                        if ($a['answer'] == 1) {
+                            $expected_correct_answer_count = $expected_correct_answer_count + 1;
+                        }
+                    }
+                    $provided_correct_answer_count = 0;
+                    $miss_one_miss_all = false;
+                    if (is_array($answer)) {
+                        foreach ($answer as $aa) {
+                            $is_correct = is_question_answer_correct($aa, $answer_arr);
+
+                            // we want to mark the answer wrong when 1 of the selected answer is
+                            // or when the selected answer does not satisfy the expected selected answer
+                            // e.g 3 selected answers expected but 2 given
+                            if ($is_correct) {
+                                $provided_correct_answer_count = $provided_correct_answer_count + 1;
+                            }else{
+                                //as long as we have a wrong anwer, this question wrong;
+                                $miss_one_miss_all = true;
+                                $provided_correct_answer_count = 0;
+                            }
+
+                            $arr['correct'] = $is_correct;
+                            $arr['answer_id'] = $aa;
+                            $this->quiz_model->save_friends_answers($arr);
+
+                        }
+                    } else {
+                        $is_correct = is_question_answer_correct($answer, $answer_arr);
+                        if ($is_correct) {
+                            $provided_correct_answer_count = $provided_correct_answer_count + 1;
+                        }
+                        $arr['correct'] = $is_correct;
+                        $arr['answer_id'] = $answer;
+                        $this->quiz_model->save_friends_answers($arr);
+                    }
+
+                    //you get this question
+                    if($miss_one_miss_all){
+                        //this user have atleaset one wrong answer
+                        $question_is_correct = 0; //this correct is not correct
+                    }else{
+                        if ($provided_correct_answer_count == $expected_correct_answer_count) {
+                            //the answer provided to this question is correct
+                            $correct_questions_count = $correct_questions_count + 1;
+                            $question_is_correct = 1; //yes
+                        } else {
+                            $question_is_correct = 0; //no
+                        }
+                    }
+
+
+                    $arr1 = array(
+                        'quiz_id' => $quiz_id,
+                        'question_id' => $q_id,
+                        'correct' => $question_is_correct,
+                        'user_id' =>$user_id,
+                        'time'=>$time
+                    );
+                    $this->quiz_model->quiz_result_by_question($arr1);
+                }
+            }
+
+            $arr2 = array(
+                'quiz_id'=>$quiz_id,
+                'user_id'=>$user_id,
+                'question_count'=>$question_count,
+                'correct_questions'=>$correct_questions_count,
+                'time'=>$time
+            );
+            $overall = $this->quiz_model->quiz_result_overall($arr2);
+
+            if ($overall) {
+                //save the quiz session
+                $this->session->set_userdata('q_result_id', $overall);
+                echo json_encode(array('status' => 1, 'message' => 'successful', 'url' => site_url('quiz/scoreboard')));
+                return;
+            } else {
+                echo json_encode(array('status' => 0, 'message' => lang('error_occured_adding_question')));
+                return;
+            }
+        }
+        //echo "Welcome Take";
+    }
+
+    function scoreboard(){
+        echo "Welcome to Answer Display Page";
     }
 
 }
