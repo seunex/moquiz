@@ -15,7 +15,23 @@ class Auth extends CI_Controller {
 
     public function login()
 	{
-		$this->load->view('templates/default/login/main');
+        $this->form_validation->set_rules('email_address','Email Address','required|trim');
+        if($this->form_validation->run()){
+            $username = $this->input->post('email_address');
+            $password = $this->input->post('password');
+
+            $user = $this->user_model->login_user($username,$password);
+            if($user){
+                $this->session->set_userdata('id',$user['id']);
+                $this->session->set_userdata('user',$user);
+                return redirect(site_url('home'));
+            }else{
+                $message = "Invalid Credentials";
+                return $this->layouts->view('templates/default/login/main',array(),array('message'=>$message),true);
+            }
+
+        }
+        $this->layouts->view('templates/default/login/main',array(),array(),true);
 	}
 
 

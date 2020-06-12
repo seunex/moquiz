@@ -293,7 +293,7 @@ class Quiz extends CI_Controller
             if ($overall) {
                 //save the quiz session
                 $this->session->set_userdata('q_result_id', $overall);
-                echo json_encode(array('status' => 1, 'message' => 'successful', 'url' => site_url('quiz/scoreboard')));
+                echo json_encode(array('status' => 1, 'message' => 'successful', 'url' => site_url('quiz/outcome')));
                 return;
             } else {
                 echo json_encode(array('status' => 0, 'message' => lang('error_occured_adding_question')));
@@ -303,8 +303,38 @@ class Quiz extends CI_Controller
         //echo "Welcome Take";
     }
 
-    function scoreboard(){
-        echo "Welcome to Answer Display Page";
+    function outcome($id = null){
+        //echo $id;
+        if(!isLoggedIn()) return redirect(site_url());
+        $quiz = array();
+        $uid = user_id();
+        $result_id = ($id) ? $id : $this->session->userdata('q_result_id');
+        //print_r($result_id);die();
+        if(!$result_id) return redirect(site_url());
+        $quiz_overall_result = $this->quiz_model->get_overall_quiz_result($result_id);
+        $quiz_overall_result_indexed = $quiz_overall_result[0];
+        $quiz = $this->quiz_model->get($quiz_overall_result_indexed['quiz_id']);
+
+        //$question_result
+        $question_result = $this->quiz_model->get_quiz_questions_result($quiz_overall_result_indexed['quiz_id'],$uid);
+
+        $user = find_user($quiz['user_id']);
+        $this->layouts->set_title(lang('quiz_result'));
+        $this->layouts->view('templates/default/quiz/result', array(), array(
+            'quiz_result' => $quiz_overall_result_indexed,
+            'question_result'=>$question_result,
+            'user'=>$user,
+            'quiz'=>$quiz), true, true, array('active' => 'score-board'));
+    }
+
+    function scoreboard($quiz_id = null){
+        $this->layouts->set_title(lang('score_board'));
+        $quiz = $this->quiz_model->get($quiz_id);
+        $quiz_results = $this->quiz_model->get_all_quiz_paticipants($quiz);
+        $this->layouts->view('templates/default/quiz/result', array(), array(
+            'quiz'=>$quiz,
+            'quiz_results'=>$quiz_results
+        ), true, true, array('active' => 'score-board'));
     }
 
 }

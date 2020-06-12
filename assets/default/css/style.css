@@ -713,7 +713,7 @@ input:checked + .slider.unselect {
     font-size: 16px;
 }
 
-.start-quiz-container .start-quiz-container-box .avatar-start-quiz{
+.avatar-start-quiz{
     height: 150px;
     width : 150px;
     border-radius: 100%;
@@ -778,4 +778,35 @@ input:checked + .slider.unselect {
 
 #take-quiz-form{
     position: relative;
+}
+
+/* quiz result */
+.user-home-content .home-title,
+.user-home-content .home-content{
+    padding: 20px;
+}
+
+.score-show{
+    font-size: 20px;
+}
+
+.question-result-row{
+    max-width: 300px;
+    padding: 15px;
+    border: 2px solid #f2f4f6;
+    display:block;
+    margin: 5px auto;
+    color : #fff;
+    font-size: 16px;
+    border-radius: 20px;
+    text-align: center;
+}
+.question-result-row img{
+    height: 50px;
+    display: block;
+    margin:0 auto;
+}
+
+.no-padding-top{
+    padding-top: 0 !important;
 }

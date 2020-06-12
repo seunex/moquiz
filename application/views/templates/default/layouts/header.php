@@ -15,6 +15,10 @@
         .user-side-bar-menu{
             background : <?php echo config('side-bar-color','#581E95') ?>
         }
+        .btn-action{
+            background-color: <?php echo config('btn-action-color', '#FF088F');?> !important;
+            color : #fff !important;
+        }
     </style>
 </head>
 <body class="overall-body">
@@ -40,7 +44,7 @@
                   </a>
                 <?php else: ?>
                     <span class="language-banner">
-                      Welcome, John
+                      Welcome, <?php echo get_user_name() ?>
                 </span>
                 <?php endif; ?>
 

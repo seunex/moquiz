@@ -16,6 +16,12 @@ function get_question_answers($question){
     $answers = $CI->quiz_model->get_answers($qid);
     return $answers;
 }
+function get_question($qid){
+    $CI = get_instance();
+    $CI->load->model('quiz_model');
+    $question = $CI->quiz_model->get_question($qid);
+    return $question;
+}
 
 function answers_type($answers){
     $default = 'radio';
@@ -41,4 +47,19 @@ function is_question_answer_correct($answer, $databaseAnswer){
         }
     }
     return $is_correct;
+}
+
+function get_quiz_score($result, $add_symbol = true){
+    $correct_questions = $result['correct_questions'];
+    $question = $result['question_count'];
+    $number = 0;
+    if($question && $correct_questions){
+        $number = ($correct_questions/$question * 100);
+        if(is_float($number)){
+            $number = round($number,2);
+            //$number = number_format((float)$number, 2, '.', '');
+        }
+    }
+    if($add_symbol) return $number.'%';
+    return $number;
 }

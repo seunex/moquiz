@@ -18,7 +18,7 @@ class Home extends CI_Controller {
 
     public function index()
 	{
-	    if(!$this->session->userdata('id')) redirect(site_url());
+	    if(!isLoggedIn()) redirect(site_url());
 	    $this->layouts->set_title(lang('welcome_title'));
 	    $quiz = $this->quiz_model->get_quiz('mine');
         $this-> layouts->view('templates/default/account/index',array(),array('quiz'=>$quiz),true,true,array('active'=>'home'));

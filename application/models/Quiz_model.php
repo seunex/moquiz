@@ -40,6 +40,11 @@ class Quiz_model extends CI_Model{
         return $query->result_array();
     }
 
+    function get_question($qid){
+        $query = $this->db->query("SELECT * FROM quiz_questions WHERE id='{$qid}'");
+        return $query->result_array();
+    }
+
     function get_answers($qid){
         $query = $this->db->query("SELECT * FROM quiz_answers WHERE question_id='{$qid}'");
         return $query->result_array();
@@ -58,5 +63,21 @@ class Quiz_model extends CI_Model{
     function quiz_result_overall($arr){
         $this->db->insert('quiz_result_overall',$arr);
         return $this->db->insert_id();
+    }
+
+    //retrieving quiz result
+    function get_overall_quiz_result($result_id){
+        $query = $this->db->query("SELECT * FROM quiz_result_overall WHERE id={$result_id}");
+        return $query->result_array();
+    }
+
+    function get_quiz_questions_result($quiz_id,$uid){
+        $query = $this->db->query("SELECT * FROM quiz_result_by_question WHERE quiz_id='{$quiz_id}' AND user_id='{$uid}'");
+        return $query->result_array();
+    }
+
+    function get_all_quiz_paticipants($quiz_id){
+        $query = $this->db->query("SELECT * FROM quiz_result_overall WHERE quiz_id='{$quiz_id}' ORDER BY correct_questions DESC");
+        return $query->result_array();
     }
 }

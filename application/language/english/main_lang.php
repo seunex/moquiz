@@ -54,4 +54,9 @@ $lang['next'] = 'Next';
 $lang['save'] = 'Save';
 $lang['submit'] = 'Submit';
 $lang['choose-answer'] = 'Choose Answer to move to the next question';
+$lang['quiz_result'] = 'Quiz Result';
+$lang['quiz_title'] = 'Quiz Title';
+$lang['score'] = 'Score';
+$lang['score_board'] = 'Score Board';
+$lang['see_score_board'] = 'See Score Board';
 

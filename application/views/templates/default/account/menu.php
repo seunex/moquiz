@@ -7,7 +7,7 @@
                 <li class="<?php echo ($active == 'profile') ? 'active' : null; ?>" data-toggle="tooltip" data-title="Profile"><a href=""><i data-feather="user"></i>Profile </a></li>
                 <li class="<?php echo ($active == 'score-board') ? 'active' : null; ?>" data-toggle="tooltip" data-title="Score Board"><a href=""> <i data-feather="monitor"></i>Score Board </a></li>
                 <li class="<?php echo ($active == 'admin-panel') ? 'active' : null; ?>" data-toggle="tooltip" data-title="Admin Panel"><a href=""> <i data-feather="settings"></i> Admin Panel </a></li>
-                <li class="<?php echo ($active == 'logout') ? 'active' : null; ?>" data-toggle="tooltip" data-title="Logout"><a href=""> <i data-feather="lock"></i>Logout </a></li>
+                <li class="<?php echo ($active == 'logout') ? 'active' : null; ?>" data-toggle="tooltip" data-title="Logout"><a href="<?php echo site_url('logout') ?>"> <i data-feather="lock"></i>Logout </a></li>
             </ul>
         </div>
         <?php echo $content; ?>
