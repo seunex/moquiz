@@ -312,4 +312,7 @@ switch (ENVIRONMENT)
  *
  * And away we go...
  */
+// Composer Autoloader
+//echo FCPATH;die();
+require FCPATH . 'application/vendor/autoload.php';
 require_once BASEPATH.'core/CodeIgniter.php';

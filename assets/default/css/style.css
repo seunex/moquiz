@@ -301,7 +301,7 @@ button:hover,
     margin: 40px auto;
 }
 
-.title-noquiz-wrapper svg {
+.title-noquiz-wrapper .icon-wrapper svg {
     margin: 20px auto;
     height: 60px;
     width: 60px;
@@ -809,4 +809,13 @@ input:checked + .slider.unselect {
 
 .no-padding-top{
     padding-top: 0 !important;
+}
+
+
+.quiz-list-actions svg{
+    stroke-width: 2;
+}
+
+.bg-ccc{
+    background: #f2f4f6;
 }

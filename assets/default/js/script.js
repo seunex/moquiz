@@ -1,3 +1,7 @@
+function signup_with_email_modal(){
+    $('#signupModal').modal('show');
+    return false;
+}
 var Moquiz = {
     general_error_message : $('#sm-wrong').val(),
 
@@ -43,31 +47,38 @@ var Moquiz = {
         window.location.href = url;
     },
     saveQuiz : function(){
-        let frm = $('#submit-quiz-form');
-        let loader = $('.form-loader');
-        loader.fadeIn();
-        frm.ajaxSubmit({
-            url : frm.attr('action'),
-            method : 'POST',
-            success : function (data) {
-                //console.log(data)
-                let rsp = jQuery.parseJSON(data);
-                if(rsp.status == 0){
-                    notifyError(rsp.message);
-                }else{
-                    notifySuccess(rsp.message);
-                   Moquiz.redirect(rsp.url)
+        let active_question = $(".q-question-answer-wrapper");
+        let index = (active_question.length - 1);
+        let min = $('#min-question-count').val();
+        let min_error_msg = $('#min-question').val();
+        console.log('minimum Number '+min+' and INDEX is '+index);
+        if(index < (parseInt(min) + 1)){
+            notifyError(min_error_msg + '('+min +')');
+        }else{
+            let frm = $('#submit-quiz-form');
+            let loader = $('.form-loader');
+            loader.fadeIn();
+            frm.ajaxSubmit({
+                url : frm.attr('action'),
+                method : 'POST',
+                success : function (data) {
+                    //console.log(data)
+                    let rsp = jQuery.parseJSON(data);
+                    if(rsp.status == 0){
+                        notifyError(rsp.message);
+                    }else{
+                        notifySuccess(rsp.message);
+                        Moquiz.redirect(rsp.url)
+                    }
+                    loader.hide();
+                },
+                error : function (data) {
+                    loader.hide();
+                    notifyError(this.general_error_message);
                 }
-                loader.hide();
-            },
+            });
+        }
 
-            error : function (data) {
-                loader.hide();
-                notifyError(this.general_error_message);
-            }
-
-
-        });
     },
 
     updateQuestionCount : function(c){
@@ -259,6 +270,32 @@ function help_me_ideas(d){
     $('.q-question-answer-wrapper.active .question-row-input input').val(text);
 }
 
+$(document).on('click','.quiz-delete-btn',function(){
+    let o = $(this);
+    let id = o.data('id');
+    let title = o.data('title');
+    let text = o.data('text');
+    let confirm = o.data('confirm');
+    Swal.fire({
+        title: title,
+        text: text,
+        //icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: confirm
+    }).then((result) => {
+        if (result.value) {
+            /*Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+            )*/
+            window.location.href = base_url + 'quiz/delete/'+id;
+        }
+    });
+   return false;
+});
 
 $(document).on('click','.add-more-answer',function(){
     let html = $('#a-one-pick').clone();
@@ -306,6 +343,10 @@ $(document).on('change','.image-file-input',function(){
 
 $(function(){
     feather.replace();
+
+    $('[data-toggle="tooltip"]').tooltip({
+        trigger: 'hover'
+    });
 
     $(document).on('click','.answer-image-area svg, .question-image-area svg',function () {
       $(this).parent().find('input').click();

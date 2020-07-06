@@ -2,6 +2,8 @@
 <input type="hidden" value="<?php echo lang("question_text_or_photo_is_required") ?>" id="rq-question"/>
 <input type="hidden" value="<?php echo lang("answer_text_or_photo_is_required") ?>" id="rq-answer"/>
 <input type="hidden" value="<?php echo lang("choose_correct_answer") ?>" id="rq-correct"/>
+<input type="hidden" value="<?php echo lang("add_minimum_x_question") ?>" id="min-question"/>
+<input type="hidden" value="3" id="min-question-count"/>
 <div class="user-home-content">
     <div class="create-quiz-wrapper">
         <div class="create-quiz-box">

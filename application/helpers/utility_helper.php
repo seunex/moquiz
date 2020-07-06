@@ -87,6 +87,13 @@ if (!function_exists('config()')) {
     }
 }
 
+function is_admin(){
+    if(!isLoggedIn()) return false;
+    $user = get_user();
+    if($user['role'] == 1) return true;
+    return false;
+}
+
 function isLoggedIn()
 {
     $CI = get_instance();
@@ -121,6 +128,14 @@ function find_user($id){
     $user = $CI->user_model->find_user($id);
     return $user;
 }
+
+function login_with_user($user){
+    $CI = get_instance();
+    $CI->session->set_userdata('id',$user['id']);
+    $CI->session->set_userdata('user',$user);
+    return $user;
+}
+
 function get_session($key,$default = null)
 {
     $CI = get_instance();
@@ -133,6 +148,11 @@ function get_session($key,$default = null)
 function get_user_name($user = array()){
     $u = ($user) ? $user : get_user();
     return $u['username'];
+}
+
+function get_user_full_name($user = array()){
+    $u = ($user) ? $user : get_user();
+    return $u['full_name'];
 }
 
 function get_avatar($user = array()){

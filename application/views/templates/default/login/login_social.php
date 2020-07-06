@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="sl-row sl-facebook">
-                    <a href="">
+                    <a href="<?php echo url('auth/facebook') ?>">
                         <img src="<?php echo img_url('social/facebook.png'); ?>"/>
                         <span class="sl-text-wrapper">
                      <span class="sl-text"> Facebook </span>
@@ -19,7 +19,7 @@
 
             <div class="col-sm-12">
                 <div class="sl-row sl-tw">
-                    <a href="">
+                    <a href="<?php echo url('auth/twitter') ?>">
                         <img src="<?php echo img_url('social/twitter.png'); ?>"/>
                         <span class="sl-text-wrapper">
                         <span class="sl-text"> Twitter </span>
@@ -30,7 +30,7 @@
 
             <div class="col-sm-12">
                 <div class="sl-row sl-google">
-                    <a href="">
+                    <a href="<?php echo url('auth/google') ?>">
                         <img src="<?php echo img_url('social/google.png'); ?>"/>
                         <span class="sl-text-wrapper">
                         <span class="sl-text"> Google </span>

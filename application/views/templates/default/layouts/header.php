@@ -44,12 +44,12 @@
                   </a>
                 <?php else: ?>
                     <span class="language-banner">
-                      Welcome, <?php echo get_user_name() ?>
+                      <?php echo lang('welcome') ?>, <?php echo ucfirst(get_user_full_name()) ?>
                 </span>
                 <?php endif; ?>
 
                 <span class="language-banner">
-                    <a href="">Language</a>
+                    <a href=""><?php echo lang('language'); ?></a>
                 </span>
 
                 </span>

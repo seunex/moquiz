@@ -16,6 +16,44 @@ function get_question_answers($question){
     $answers = $CI->quiz_model->get_answers($qid);
     return $answers;
 }
+
+function get_participants($quiz,$type = 'count'){
+    $quiz_id = $quiz['id'];
+    $CI = get_instance();
+    $CI->load->model('quiz_model');
+    $particpants = $CI->quiz_model->get_participants($quiz_id,$type);
+    return $particpants;
+}
+
+function find_quiz($quiz_id){
+    $CI = get_instance();
+    $CI->load->model('quiz_model');
+    $quiz = $CI->quiz_model->get($quiz_id);
+    return $quiz;
+}
+
+function ordinal($number) {
+    $ends = array('th','st','nd','rd','th','th','th','th','th','th');
+    if ((($number % 100) >= 11) && (($number%100) <= 13))
+        return $number. 'th';
+    else
+        return $number. $ends[$number % 10];
+}
+
+function delete_quiz($quiz_id){
+    $CI = get_instance();
+    $CI->load->model('quiz_model');
+    //delete quiz_model
+    $CI->quiz_model->delete_quiz($quiz_id);
+    //delete quiz answers
+    $CI->quiz_model->delete_answers($quiz_id);
+    //delete quiz_questions
+    $CI->quiz_model->delete_questions($quiz_id);
+    //delete quiz results
+    $CI->quiz_model->delete_results($quiz_id);
+    return true;
+}
+
 function get_question($qid){
     $CI = get_instance();
     $CI->load->model('quiz_model');

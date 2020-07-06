@@ -8,7 +8,7 @@ class Quiz extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->library(array('layouts', 'session'));
+        $this->load->library(array('layouts', 'session','pagination'));
         $this->load->language('main');
         $this->load->helper(array('language', 'quiz'));
         $this->load->database();
@@ -172,12 +172,27 @@ class Quiz extends CI_Controller
 
     }
 
-    public function share()
+    public function delete($id){
+        $quiz = find_quiz($id);
+        if(!$quiz){
+            return $this->layouts->view('templates/default/quiz/delete', array(), array('type' => 'no-quiz'), true, true, array('active' => 'home'));
+        }
+        if(!isLoggedIn()) redirect(site_url());
+        if(is_admin() || $quiz['user_id'] == user_id()){
+            delete_quiz($id);
+            return $this->layouts->view('templates/default/quiz/delete', array(), array('type' => 'success'), true, true, array('active' => 'home'));
+        }else{
+            return $this->layouts->view('templates/default/quiz/delete', array(), array('type' => 'no-perm'), true, true, array('active' => 'home'));
+        }
+    }
+
+
+    public function share($id)
     {
         if (!isLoggedIn()) redirect(site_url());
         //if (!get_session('quiz_id')) redirect(site_url());
         $this->layouts->set_title(lang('share_your_quiz'));
-        $last_created_quiz = $this->session->userdata('quiz_id');
+        $last_created_quiz = ($this->session->userdata('quiz_id')) ?  $this->session->userdata('quiz_id') : $id;
         $quiz = $this->quiz_model->get($last_created_quiz);
         $this->layouts->view('templates/default/quiz/share', array(), array('quiz' => $quiz), true, true, array('active' => 'create-quiz'));
     }
@@ -189,6 +204,8 @@ class Quiz extends CI_Controller
         $this->layouts->set_title(lang('take_quiz'));
         $user = find_user($quiz['user_id']);
         $questions = $this->quiz_model->get_questions($quiz['id']);
+        $url = current_url();
+        $this->session->set_userdata('redirect_url', $url);
         return $this->layouts->view('templates/default/quiz/start', array(), array('quiz' => $quiz, 'user' => $user, 'questions' => $questions), true, false, array('active' => 'create-quiz'));
     }
 
@@ -327,14 +344,39 @@ class Quiz extends CI_Controller
             'quiz'=>$quiz), true, true, array('active' => 'score-board'));
     }
 
-    function scoreboard($quiz_id = null){
+    function scoreboard($quiz_id = null,$offset = 0){
         $this->layouts->set_title(lang('score_board'));
         $quiz = $this->quiz_model->get($quiz_id);
-        $quiz_results = $this->quiz_model->get_all_quiz_paticipants($quiz);
-        $this->layouts->view('templates/default/quiz/result', array(), array(
-            'quiz'=>$quiz,
-            'quiz_results'=>$quiz_results
-        ), true, true, array('active' => 'score-board'));
+        //$quiz_results = $this->quiz_model->get_all_quiz_paticipants($quiz_id);
+
+        $config = array(
+            'base_url' => base_url('quiz/scoreboard/'.$quiz_id),
+            'per_page' => 10,
+            'total_rows' => get_participants($quiz,'count'),
+        );
+
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';
+        $config['num_tag_open'] = '<li class="page-item">';
+        $config['num_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="page-item active"><a class="page-link" href="#">';
+        $config['cur_tag_close'] = '</a></li>';
+        $config['next_tag_open'] = '<li class="page-item">';
+        $config['next_tagl_close'] = '</a></li>';
+        $config['prev_tag_open'] = '<li class="page-item">';
+        $config['prev_tagl_close'] = '</li>';
+        $config['first_tag_open'] = '<li class="page-item disabled">';
+        $config['first_tagl_close'] = '</li>';
+        $config['last_tag_open'] = '<li class="page-item">';
+        $config['last_tagl_close'] = '</a></li>';
+        $config['attributes'] = array('class' => 'page-link');
+        $this->pagination->initialize($config); // model function
+        //$quiz = $this->quiz_model->get_quiz('mine',$config['per_page'], $this->uri->segment(3));
+        $quiz_results = $this->quiz_model->get_all_quiz_paticipants($quiz_id,$config['per_page'], $this->uri->segment(4));
+        $i = 1;
+        if($offset) $i = $offset;
+        //$this->layouts->view('templates/default/quiz/result', array(), array('quiz'=>$quiz, 'quiz_results'=>$quiz_results), true, true, array('active' => 'home'));
+        $this->layouts->view('templates/default/quiz/scoreboard', array(), array('quiz'=>$quiz, 'quiz_results'=>$quiz_results,'i'=>$i), true, true, array('active' => 'home'));
     }
 
 }

@@ -60,7 +60,8 @@ $route['register_auth'] = 'auth/register';
 $route['register'] = 'register';
 
 //home
-$route['home'] = 'home';
+//$route['home'] = 'home';
+$routes['home/(:num)']  = 'home/$1';
 $route['create_quiz'] = 'quiz/create';
 $route['share_quiz'] = 'quiz/share';
 $route['take_quiz'] = 'quiz/take';

@@ -7,7 +7,11 @@ class User_model extends CI_Model{
     }
 
     function find_user($uid){
-        $query = $this->db->get_where('users', array('id' => $uid), 1, 0);
+        //$query = $this->db->get_where('users', array('id' => $uid), 1, 0);
+        $this->db->or_where('id', $uid);
+        $this->db->or_where('username', $uid);
+        $this->db->or_where('email_address', $uid);
+        $query = $this->db->get('users');
         if($result = $query->result_array()){
             return $result[0];
         }
