@@ -14,9 +14,6 @@ class Logout extends CI_Controller {
     public function index()
 	{
         if(!$this->session->userdata('id')) redirect(site_url());
-        //let us get the user session
-        //we will now unset
-        $this->session->unset_userdata(array('id','user'));
-        redirect(site_url());
+        logout_user();
 	}
 }

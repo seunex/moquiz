@@ -819,3 +819,8 @@ input:checked + .slider.unselect {
 .bg-ccc{
     background: #f2f4f6;
 }
+
+.profile-picture-wrapper img{
+    height: 200px;
+    width : 200px;
+}

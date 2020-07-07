@@ -14,14 +14,18 @@ var Moquiz = {
     toggleAccountCreateBtn(obj){
        let cText = $(obj).data('ltext');
        let lText = $(obj).data('ctext');
-       if($('.home-page-wrapper-content-login').css('display') === 'block'){
-           $('.home-page-wrapper-content-login').hide();
-           $('.home-page-wrapper-content-signup').fadeIn();
-           $(obj).html(cText)
+       if($('.home-page-wrapper-content-login').length){
+           if($('.home-page-wrapper-content-login').css('display') === 'block'){
+               $('.home-page-wrapper-content-login').hide();
+               $('.home-page-wrapper-content-signup').fadeIn();
+               $(obj).html(cText)
+           }else{
+               $('.home-page-wrapper-content-signup').hide();
+               $('.home-page-wrapper-content-login').fadeIn();
+               $(obj).html(lText)
+           }
        }else{
-           $('.home-page-wrapper-content-signup').hide();
-           $('.home-page-wrapper-content-login').fadeIn();
-           $(obj).html(lText)
+           signup_with_email_modal();
        }
        return false;
     },
@@ -268,6 +272,28 @@ function elem_fade_toggle(e){
 function help_me_ideas(d){
     let text = $(d).val();
     $('.q-question-answer-wrapper.active .question-row-input input').val(text);
+}
+
+function delete_user(obj){
+    let o = $(obj);
+    let id = o.data('id');
+    let title = o.data('title');
+    let text = o.data('text');
+    let confirm = o.data('confirm');
+    Swal.fire({
+        title: title,
+        text: text,
+        //icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: confirm
+    }).then((result) => {
+        if (result.value) {
+            window.location.href = base_url + 'account/delete/'+id;
+        }
+    });
+    return false;
 }
 
 $(document).on('click','.quiz-delete-btn',function(){

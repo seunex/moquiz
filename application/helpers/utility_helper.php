@@ -7,6 +7,15 @@ if (!function_exists('asset_url()')) {
     }
 }
 
+if (!function_exists('asset_url()')) {
+    function storage_url($str = null)
+    {
+        return base_url() .$str;
+    }
+}
+
+
+
 if (!function_exists('get_settings()')) {
     function get_settings($key)
     {
@@ -122,11 +131,28 @@ function get_user()
     return false;
 }
 
+function session_put($name,$value){
+    $CI = get_instance();
+    $CI->session->set_userdata($name,$value);
+}
+
+function session_get($name,$default= null){
+    $CI = get_instance();
+    $r = $CI->session->userdata($name);
+    if(!$r) return $default;
+}
+
 function find_user($id){
     $CI = get_instance();
     $CI->load->model('user_model');
     $user = $CI->user_model->find_user($id);
     return $user;
+}
+
+function delete_user($uid){
+    $CI = get_instance();
+    $CI->load->model('user_model');
+    $CI->user_model->delete_user($uid);
 }
 
 function login_with_user($user){
@@ -135,6 +161,14 @@ function login_with_user($user){
     $CI->session->set_userdata('user',$user);
     return $user;
 }
+
+function logout_user(){
+    $CI = get_instance();
+    $CI->session->unset_userdata(array('id','user'));
+    redirect(site_url());
+}
+
+
 
 function get_session($key,$default = null)
 {
@@ -157,6 +191,6 @@ function get_user_full_name($user = array()){
 
 function get_avatar($user = array()){
     $u = ($user) ? $user : get_user();
-    if($u['avatar']) return asset_url($u['avatar']);
+    if($u['avatar']) return storage_url($u['avatar']);
     return asset_url('default/img/av.png');
 }

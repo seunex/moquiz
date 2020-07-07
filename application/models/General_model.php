@@ -1,13 +1,19 @@
 <?php
 
 class General_model extends CI_Model{
-    function username_exists($str){
+    function username_exists($str,$update = 0){
         $this->db->where('username', $str);
+        if($update){
+            $this->db->where('id != ', $update);
+        }
         return $this->db->get('users')->num_rows();
     }
 
-    function email_exists($email){
+    function email_exists($email,$update = 0){
         $this->db->where('email_address',$email);
+        if($update){
+            $this->db->where('id != ', $update);
+        }
         return $this->db->get('users')->num_rows();
     }
 

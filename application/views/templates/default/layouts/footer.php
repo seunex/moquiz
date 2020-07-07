@@ -1,4 +1,4 @@
-
+<?php $this->view('templates/default/register/modal'); ?>
 </body>
 <script>
     var base_url = '<?php echo site_url(); ?>'

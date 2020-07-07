@@ -25,7 +25,7 @@
                        placeholder="<?php echo lang('your_quiz_title'); ?>" name="title"/>
                 <button class="btn btn-info btn-lg submit-q-title" type="button" onclick="return Moquiz.saveQuestion()"
                         style="background: <?php echo config('btn-action-color', '#FF088F'); ?>">
-                    Add Questions <i data-feather="chevrons-right"></i>
+                    <?php echo lang('add_questions') ?> <i data-feather="chevrons-right"></i>
                 </button>
             </div>
             <div class="quiz-question-create-box" style="display: none;">
@@ -51,12 +51,11 @@
                                 </div>
                                 <br/>
                                 <button type="button" class="btn btn-secondary btn-sm" data-elem=".question-image-area"
-                                        onclick="return elem_fade_toggle(this)"><i data-feather="image"></i> Question
-                                    Image
+                                        onclick="return elem_fade_toggle(this)"><i data-feather="image"></i> <?php echo lang('question_image') ?>
                                 </button>
                                 <div class="question-image-area">
                                     <i data-feather="upload"></i>
-                                    <span class="image-choose-text">Choose Image</span>
+                                    <span class="image-choose-text"><?php echo lang('choose_image') ?></span>
                                     <input type="file" name="qimage_1" class="image-file-input hidden"/>
                                     <img class="img hidden " src=""/>
                                 </div>
@@ -65,7 +64,7 @@
                             <br/>
                             <div class="divider-with-text">
                                 <span class="divider-with-text-line" style="background: <?php echo config('side-bar-color','#581E95') ?>"></span>
-                                <span class="d-text" style="border-color :<?php echo config('side-bar-color','#581E95') ?> "> <b> Answers </b></span>
+                                <span class="d-text" style="border-color :<?php echo config('side-bar-color','#581E95') ?> "> <b> <?php echo lang('answers'); ?> </b></span>
                             </div>
 
                             <br/>
@@ -76,19 +75,19 @@
                                     <div class="row">
                                         <div class="col-6"></div>
                                         <div class="col-6">
-                                            <h6> Correct Answer? </h6></div>
+                                            <h6> <?php echo lang('is_correct_answer') ?> </h6></div>
                                     </div>
 
                                     <div class="row a-input-wrapper">
                                         <div class="col-6 lhs">
                                             <div class="answer-image-area">
                                                 <i data-feather="upload"></i>
-                                                <span class="image-choose-text">Choose Image</span>
+                                                <span class="image-choose-text"><?php echo lang('choose_image') ?></span>
                                                 <input type="file" name="answer_image_1_1"
                                                        class="hidden image-file-input"/>
                                                 <img class="img hidden" src=""/>
                                             </div>
-                                            <input type="text" placeholder="Answer Text "
+                                            <input type="text" placeholder="<?php echo lang('answer_text') ?>"
                                                    class="form-control answer-box-row-input" name="answer_text_1_1"/>
                                         </div>
                                         <div class="col-6">
@@ -103,12 +102,12 @@
                                         <div class="col-6 lhs">
                                             <div class="answer-image-area">
                                                 <i data-feather="upload"></i>
-                                                <span class="image-choose-text">Choose Image</span>
+                                                <span class="image-choose-text"><?php echo lang('choose_image') ?></span>
                                                 <input type="file" name="answer_image_1_2"
                                                        class="hidden image-file-input"/>
                                                 <img class="img hidden" src=""/>
                                             </div>
-                                            <input type="text" placeholder="Answer Text "
+                                            <input type="text" placeholder="<?php echo lang('answer_text') ?>"
                                                    class="form-control answer-box-row-input" name="answer_text_1_2"/>
                                         </div>
                                         <div class="col-6">
@@ -123,7 +122,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <button type="button" class="btn btn-secondary add-more-answer"><i
-                                                    data-feather="plus"></i> Answer
+                                                    data-feather="plus"></i> <?php echo lang('answer') ?>
                                         </button>
                                     </div>
                                 </div>
@@ -135,7 +134,7 @@
                     <div class="row col-sm-12">
                         <div class="col-sm-12 alert alert-info">
                             <div class="qq-btn-count centered bold">
-                                Question #1
+                                <?php echo lang('question') ?> #1
                             </div>
                         </div>
                     </div>
@@ -145,17 +144,17 @@
                             <button type="button" onclick="return Moquiz.prevQuestion(this)"
                                     class="btn btn-info submit-q-prev"
                                     style="background: <?php echo config('btn-action-color', '#FF088F'); ?>">
-                                <i data-feather="chevrons-left"></i> PREV
+                                <i data-feather="chevrons-left"></i> <?php echo lang('prev_caps'); ?>
                             </button>
                             <button type="button" class="btn btn-info submit-q-next"
                                     onclick="return Moquiz.nextQuestion()"
                                     style="background: <?php echo config('btn-action-color', '#FF088F'); ?>">
-                                ADD QUESTION <i data-feather="chevrons-right"></i>
+                                <?php echo lang('add_question_caps') ?> <i data-feather="chevrons-right"></i>
                             </button>
                             <button type="button" class="btn btn-info submit-save-quiz"
                                     onclick="return Moquiz.saveQuiz()"
                                     style="background: <?php echo config('btn-action-color', '#FF088F'); ?>">
-                                SAVE QUIZ <i data-feather="save"></i>
+                                <?php echo lang('save_quiz_caps'); ?> <i data-feather="save"></i>
                             </button>
                         </div>
                     </div>
@@ -172,11 +171,11 @@
         <a class="remove-answer-box" href=""><i data-feather="x-circle"></i></a>
         <div class="answer-image-area">
             <i data-feather="upload"></i>
-            <span class="image-choose-text">Choose Image</span>
+            <span class="image-choose-text"><?php echo lang('choose_image') ?></span>
             <input type="file" name="   answer[]" class="hidden image-file-input"/>
             <img class="img hidden" src=""/>
         </div>
-        <input type="text" placeholder="Answer Text " class="form-control answer-box-row-input" name="answer[]"/>
+        <input type="text" placeholder="<?php echo lang('answer_text') ?>" class="form-control answer-box-row-input" name="answer[]"/>
     </div>
     <div class="col-6">
         <label class="switch">
@@ -195,7 +194,7 @@
                    class="form-control"/>
 
             <span class="possible-questions">
-                                <a href=""> Need a Hand? <i data-feather="sun"></i></a>
+                                <a href=""> <?php echo lang('need_a_hand') ?> <i data-feather="sun"></i></a>
                                 <span class="pqs">
                                     <?php $this->view("templates/default/snippets/qideas") ?>
                                 </span>
@@ -203,12 +202,11 @@
         </div>
         <br/>
         <button type="button" class="btn btn-secondary btn-sm" data-elem=".question-image-area"
-                onclick="return elem_fade_toggle(this)"><i data-feather="image"></i> Question
-            Image
+                onclick="return elem_fade_toggle(this)"><i data-feather="image"></i> <?php echo lang('question_image') ?>
         </button>
         <div class="question-image-area">
             <i data-feather="upload"></i>
-            <span class="image-choose-text">Choose Image</span>
+            <span class="image-choose-text"><?php echo lang('choose_image') ?></span>
             <input type="file" name="qimage_1" class="image-file-input hidden"/>
             <img class="img hidden " src=""/>
         </div>
@@ -217,7 +215,7 @@
     <br/>
     <div class="divider-with-text">
         <span class="divider-with-text-line"></span>
-        <span class="d-text"> <b> Answers </b></span>
+        <span class="d-text"> <b> <?php echo lang('answers'); ?> </b></span>
     </div>
 
     <br/>
@@ -228,19 +226,19 @@
             <div class="row">
                 <div class="col-6"></div>
                 <div class="col-6">
-                    <h6> Correct Answer? </h6></div>
+                    <h6> <?php echo lang('is_correct_answer'); ?> </h6></div>
             </div>
 
             <div class="row a-input-wrapper">
                 <div class="col-6 lhs">
                     <div class="answer-image-area">
                         <i data-feather="upload"></i>
-                        <span class="image-choose-text">Choose Image</span>
+                        <span class="image-choose-text"><?php echo lang('choose_image'); ?></span>
                         <input type="file" name="answer_image_1_1"
                                class="hidden image-file-input"/>
                         <img class="img hidden" src=""/>
                     </div>
-                    <input type="text" placeholder="Answer Text "
+                    <input type="text" placeholder="<?php echo lang('answer_text') ?>"
                            class="form-control answer-box-row-input" name="answer_text_1_1"/>
                 </div>
                 <div class="col-6">
@@ -255,12 +253,12 @@
                 <div class="col-6 lhs">
                     <div class="answer-image-area">
                         <i data-feather="upload"></i>
-                        <span class="image-choose-text">Choose Image</span>
+                        <span class="image-choose-text"><?php echo lang('choose_image') ?></span>
                         <input type="file" name="answer_image_1_2"
                                class="hidden image-file-input"/>
                         <img class="img hidden" src=""/>
                     </div>
-                    <input type="text" placeholder="Answer Text "
+                    <input type="text" placeholder="<?php echo lang('answer_text') ?>"
                            class="form-control answer-box-row-input" name="answer_text_1_2"/>
                 </div>
                 <div class="col-6">
@@ -275,7 +273,7 @@
         <div class="row">
             <div class="col">
                 <button type="button" class="btn btn-secondary add-more-answer"><i
-                            data-feather="plus"></i> Answer
+                            data-feather="plus"></i> <?php echo lang('answer'); ?>
                 </button>
             </div>
         </div>

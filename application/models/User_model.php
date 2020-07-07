@@ -6,8 +6,22 @@ class User_model extends CI_Model{
         return $this->db->insert_id();
     }
 
+    function update_user($data,$id = null){
+        $uid = ($id) ? $id : user_id();
+        $this->db->where('id', $uid);
+        $this->db->update('users', $data);
+    }
+
+    function delete_user($id){
+        $this->db->delete('users', array('id' => $id));
+        $this->db->delete('quiz_result_overall', array('user_id' => $id));
+        $this->db->delete('quiz_result_by_question', array('user_id' => $id));
+        $this->db->delete('quiz_friend_answers', array('user_id' => $id));
+        $this->db->delete('quiz_details', array('user_id' => $id));
+
+    }
+
     function find_user($uid){
-        //$query = $this->db->get_where('users', array('id' => $uid), 1, 0);
         $this->db->or_where('id', $uid);
         $this->db->or_where('username', $uid);
         $this->db->or_where('email_address', $uid);
