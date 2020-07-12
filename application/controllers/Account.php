@@ -32,6 +32,7 @@ class Account extends CI_Controller
 
     public function index()
     {
+        if(!isLoggedIn()) return redirect(site_url());
         $this->form_validation->set_rules('full_name', 'Full Name', 'required|trim');
         $this->form_validation->set_rules('username', 'User Name', 'required|trim|alpha_numeric|min_length[3]|callback_check_username');
         $this->form_validation->set_rules('email_address', 'Email Address', 'required|trim|valid_email|callback_check_email');

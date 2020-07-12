@@ -109,5 +109,9 @@ $lang['password_does_not_match'] = "Password does not match";
 $lang['wrong_password'] = "Wrong password";
 $lang['changes_saved_successfully'] = "Changes saved successfully";
 $lang['are-you-sure-you-want-to-delete-account'] = "Are you sure you want to delete account? ";
+$lang['manage-website-settings'] = "Manage Website Settings";
+$lang['website-settings'] = "Website Settings";
+$lang['admin-control-panel'] = "Administrative Control Panel";
+$lang['website-configurations'] = "Administrative Control Panel";
 
 
