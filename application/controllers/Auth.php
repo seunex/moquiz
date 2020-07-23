@@ -11,12 +11,13 @@ class Auth extends CI_Controller {
         $this->load->helper('language');
         $this->load->language('main');
         $this->load->database();
+        $this->configs = $this->general_model->configs();
     }
 
     public function facebook(){
         $config = array(
             'callback' => url('auth/facebook'),
-            'keys' => array( 'key' => '317221782637534', 'secret' => '67b78bacd7df5ff37ad1d33dcd2f9fe1' )
+            'keys' => array( 'key' => config('facebook-key',''), 'secret' => config('facebook-secret'))
         );
 
         try {
@@ -58,7 +59,7 @@ class Auth extends CI_Controller {
     public function twitter(){
         $config = array(
             'callback' => url('auth/twitter'),
-            'keys' => array( 'key' => 'HDgvOzae2GSG5v1L2usxNE2b0', 'secret' => 'PnLvPLdJxeBkF5wihz2JZF4bRyPUE1mGUMRtTOp3hIbV7uSgps' )
+            'keys' => array( 'key' => config('twitter-key',''), 'secret' => config('twitter-secret','') )
         );
 
         try {
@@ -99,7 +100,7 @@ class Auth extends CI_Controller {
     public function google(){
         $config = array(
             'callback' => url('auth/google'),
-            'keys' => array( 'key' => '318446711491-jeig1qdj4tcn4dqo9ktvuv6dtf9e72u8.apps.googleusercontent.com', 'secret' => 'lrmW_jfvJGKPX7_pRMXlBO3z' )
+            'keys' => array( 'key' => config('google-key',''), 'secret' => config('google-secret',''))
         );
 
         try {

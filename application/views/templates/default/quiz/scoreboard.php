@@ -13,13 +13,14 @@
             <?php if ($quiz_results): ?>
                 <?php
                 //$i = 1;
-            if($i > 1) $i = $i + 1;
+                if ($i > 1) $i = $i + 1;
                 ?>
 
                 <table class="table table-bordered table-borderless mt-4 br15" style="border-radius: 30px;">
                     <thead class="thead-dark">
                     <tr>
                         <th style="width: 25%"><?php echo lang('rank') ?></th>
+                        <th style="width: 20%"><?php echo lang('photo') ?></th>
                         <th style="width: 50%"><?php echo lang('name') ?></th>
                         <th style="width: 25%"><?php echo lang('score') ?></th>
                     </tr>
@@ -27,9 +28,11 @@
                     <tbody>
                     <?php foreach ($quiz_results as $quiz_result):
                         $user = find_user($quiz_result['user_id']);
+                        $avatar = get_avatar($user);
                         ?>
                         <tr class="<?php echo ($quiz_result['user_id'] == user_id()) ? 'bg-ccc' : ''; ?>">
                             <td><?php echo ordinal($i) ?></td>
+                            <td><img src="<?php echo $avatar; ?>" class="img-table-quiz"/></td>
                             <td><?php echo get_user_full_name($user); ?></td>
                             <td><?php echo get_quiz_score($quiz_result, true); ?></td>
                         </tr>
@@ -40,6 +43,10 @@
                 <div class="centered" style="text-align: center">
                     <?= $this->pagination->create_links() ?>
                 </div>
+            <?php else: ?>
+            <div class="alert alert-info mt-4">
+                <?php echo lang("no-quiz-results") ?>
+            </div>
             <?php endif; ?>
         </div>
     </div>

@@ -53,6 +53,7 @@ $route['default_controller'] = 'Main';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['assets/(:any)'] = 'assets/$1';
+$route['page/(:any)'] = "page/index/$1";
 //started adding default ones
 $route['login_auth'] = 'auth/login';
 $route['login'] = 'login';

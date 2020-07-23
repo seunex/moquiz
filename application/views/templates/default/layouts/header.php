@@ -19,28 +19,31 @@
             background-color: <?php echo config('btn-action-color', '#FF088F');?> !important;
             color : #fff !important;
         }
+        .btn-border{
+            border-color: <?php echo config('btn-action-color', '#FF088F');?> !important;;
+        }
     </style>
 </head>
 <body class="overall-body">
 
 <div class="container-wrapper header">
     <div class="container">
-        <nav class="navbar navbar-light bg-light-quiz">
-            <a class="navbar-brand" href="#">
-                <img src="<?php echo asset_url() . '/default/' . 'img/logo_test.png' ?>" width="30" height="30"
-                     class="d-inline-block align-top" alt="">
-                FriendsQuizzy
+        <nav class="navbar navbar-light bg-light-quiz pr-0 pl-0">
+            <a class="navbar-brand" href="<?php echo url(''); ?>">
+                <!--<img src="<?php /*echo asset_url() . '/default/' . 'img/logo_test.png' */?>" width="30" height="30"
+                     class="d-inline-block align-top" alt="">-->
+                <?php echo config('website-title', 'FriendsQuizzy'); ?>
             </a>
 
             <span class="top-corner-button navbar-text">
 
                 <?php if(!isLoggedIn()): ?>
-                 <a style="background : <?php echo '#0288D1'; ?>; border-color: <?php echo '#0288D1'; ?>"
+                 <a style="background : "
                     href=""
                     onclick="return Moquiz.toggleAccountCreateBtn(this)"
                     data-ltext="<?php echo lang('login') ?>"
                     data-ctext="<?php echo lang('create_new_account') ?>"
-                    class=""> <?php echo lang('create_new_account') ?>
+                    class="btn-action btn-border"> <?php echo lang('create_new_account') ?>
                   </a>
                 <?php else: ?>
                     <span class="language-banner">

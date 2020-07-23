@@ -242,6 +242,8 @@ button:hover,
     border-radius: 10px;
     -webkit-box-shadow: 0 0 10px #fff;
     box-shadow: 0 0 10px #aaa;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .user-side-bar-menu {
@@ -823,4 +825,39 @@ input:checked + .slider.unselect {
 .profile-picture-wrapper img{
     height: 200px;
     width : 200px;
+}
+
+.img-table-quiz{
+    height: 100px;
+    width : 100px;
+}
+
+.font-12{
+    font-size: 12px;
+}
+
+.font-14{
+    font-size: 14px;
+}
+
+.font-16{
+    font-size: 16px;
+}
+
+.min-height-textarea{
+    height: 100px !important;
+}
+
+.sp-colorize{
+    height: 100%;
+}
+
+.max-width-form{
+    max-width: 600px;
+    margin:0 auto;
+    display: block;
+}
+
+.page-content{
+    font-size: 14px;
 }

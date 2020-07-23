@@ -1,0 +1,1 @@
+<span class="pull-right"><!--<a class="forgot-password" href=""> <?php /*echo lang("forgot_password") */?></a>--></span>

@@ -312,12 +312,51 @@ $(document).on('click','.quiz-delete-btn',function(){
         confirmButtonText: confirm
     }).then((result) => {
         if (result.value) {
-            /*Swal.fire(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-            )*/
             window.location.href = base_url + 'quiz/delete/'+id;
+        }
+    });
+   return false;
+});
+
+$(document).on('click','.page-delete-btn',function(){
+    let o = $(this);
+    let id = o.data('id');
+    let title = o.data('title');
+    let text = o.data('text');
+    let confirm = o.data('confirm');
+    Swal.fire({
+        title: title,
+        text: text,
+        //icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: confirm
+    }).then((result) => {
+        if (result.value) {
+            window.location.href = base_url + 'admincp/pages?type=delete&id='+id;
+        }
+    });
+   return false;
+});
+
+$(document).on('click','.user-delete-btn',function(){
+    let o = $(this);
+    let id = o.data('id');
+    let title = o.data('title');
+    let text = o.data('text');
+    let confirm = o.data('confirm');
+    Swal.fire({
+        title: title,
+        text: text,
+        //icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: confirm
+    }).then((result) => {
+        if (result.value) {
+            window.location.href = base_url + 'admincp/users/delete/'+id;
         }
     });
    return false;
@@ -367,8 +406,20 @@ $(document).on('change','.image-file-input',function(){
     readURL(this);
 });
 
+function init_editor(){
+    $.trumbowyg.svgPath = base_url+'assets/default/img/icons.svg';
+    $('.p-editor').trumbowyg({
+        autogrow: true
+    });
+
+}
+
 $(function(){
     feather.replace();
+    $('.color-picker').spectrum({
+        type: "component"
+    });
+    init_editor();
 
     $('[data-toggle="tooltip"]').tooltip({
         trigger: 'hover'

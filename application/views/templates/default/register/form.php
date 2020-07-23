@@ -20,5 +20,5 @@
         <?php echo form_password(array('name'=>'password','class'=>'form-control')) ?>
     </div>
 
-    <button type="submit" class="btn btn-primary "> <?php echo lang('create_your_account') ?> </button>
+    <button type="submit" class="btn btn-primary btn-action"> <?php echo lang('create_your_account') ?> </button>
 </form>

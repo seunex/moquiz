@@ -3,43 +3,57 @@
 class Quiz_model extends CI_Model
 {
 
-    function delete_quiz($quiz_id){
+    function delete_quiz($quiz_id)
+    {
         $this->db->delete('quiz_details', array('id' => $quiz_id));
     }
 
-    function delete_answers($quiz_id){
+    function delete_answers($quiz_id)
+    {
         $this->db->delete('quiz_answers', array('quiz_id' => $quiz_id));
     }
 
-    function delete_questions($quiz_id){
+    function delete_questions($quiz_id)
+    {
         $this->db->delete('quiz_questions', array('quiz_id' => $quiz_id));
         $this->db->delete('quiz_result_by_question', array('quiz_id' => $quiz_id));
     }
 
-    function delete_results($quiz_id){
+    function delete_results($quiz_id)
+    {
         $this->db->delete('quiz_result_overall', array('quiz_id' => $quiz_id));
         $this->db->delete('quiz_results', array('quiz_id' => $quiz_id));
     }
-    function get_participants($quiz_id,$type){
+
+    function get_participants($quiz_id, $type)
+    {
         $query = $this->db->select('*')
             ->from('quiz_result_overall')
             ->where('quiz_id', $quiz_id)
             ->get();
-        if($type == 'count'){
+        if ($type == 'count') {
             return $query->num_rows();
         }
         return $query->result_array();
     }
 
-    function get_quiz($type = 'mine',$limit = 3, $offset = 0)
+    function get_quiz($type = 'mine', $limit = 3, $offset = 0)
     {
         switch ($type) {
             case 'mine':
                 $userid = user_id();
                 $query = $this->db->select('*')
                     ->from('quiz_details')
-                    ->where('user_id',$userid)
-                    ->limit($limit,$offset)
+                    ->where('user_id', $userid)
+                    ->limit($limit, $offset)
+                    ->order_by('time', 'DESC')
+                    ->get();
+                return $query->result_array();
+                break;
+            case 'all':
+                $query = $this->db->select('*')
+                    ->from('quiz_details')
+                    ->limit($limit, $offset)
                     ->order_by('time', 'DESC')
                     ->get();
                 return $query->result_array();
@@ -140,13 +154,13 @@ class Quiz_model extends CI_Model
         return $query->result_array();
     }
 
-    function get_all_quiz_paticipants($quiz_id,$limit = 2, $offset = 0)
+    function get_all_quiz_paticipants($quiz_id, $limit = 2, $offset = 0)
     {
         ///$query = $this->db->query("SELECT * FROM quiz_result_overall WHERE quiz_id='{$quiz_id}' ORDER BY correct_questions DESC");
         $query = $this->db->select('*')
             ->from('quiz_result_overall')
-            ->where('quiz_id',$quiz_id)
-            ->limit($limit,$offset)
+            ->where('quiz_id', $quiz_id)
+            ->limit($limit, $offset)
             ->order_by('correct_questions', 'DESC')
             ->get();
         //var_dump($query);die();

@@ -11,9 +11,9 @@
             <?php echo form_input(array('type'=>'password','name'=>'password','class'=>'form-control')); ?>
         </div>
 
-        <p class="forgot-me-container"><input type="checkbox" /> <?php echo lang('remember_me') ?> <span class="pull-right"> <a class="forgot-password" href=""> <?php echo lang("forgot_password") ?></a> </span> </p>
+        <p class="forgot-me-container"><input type="checkbox" /> <?php echo lang('remember_me') ?>  </p>
 
-        <button type="submit" class="btn btn-primary btn-smg"><?php echo lang('sign_in') ?></button>
+        <button type="submit" class="btn btn-primary btn-smg btn-action"><?php echo lang('sign_in') ?></button>
     </form>
 </div>
 <?php $this->view('templates/default/login/login_social'); ?>

@@ -194,3 +194,36 @@ function get_avatar($user = array()){
     if($u['avatar']) return storage_url($u['avatar']);
     return asset_url('default/img/av.png');
 }
+
+function toAscii($str, $replace = array(), $delimiter = '-', $charset = 'ISO-8859-1') {
+    $str = str_replace(array(chr(145), chr(146), chr(147), chr(148), chr(150), chr(151), chr(133)), array("'", "'", '"', '"', '-', '--', '...'), $str);
+    $str = function_exists('iconv') ? iconv($charset, 'UTF-8', $str) : $str;
+    $str = !empty($replace) ? str_replace((array) $replace, ' ', $str) : $str;
+    //$str = preg_replace('/[^\x{0600}-\x{06FF}A-Za-z !@#$%^&*()]/u','', $str);
+    $clean = function_exists('iconv') ? iconv('UTF-8', 'ASCII//IGNORE', $str) : $str;
+    $clean = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $clean);
+    $clean = strtolower(trim($clean, '-'));
+    $clean = preg_replace("/[\/_|+ -]+/", $delimiter, $clean);
+    $clean = strtolower(trim($clean, '-'));
+    return $clean;
+}
+
+if(!function_exists('sanitizeText')) {
+    function sanitizeText($string, $limit = false, $output = false) {
+        if(!is_string($string)) return $string;
+        $string = trim($string);
+        //$string = htmlspecialchars($string, ENT_QUOTES);
+
+        $string = str_replace('&amp;#', '&#', $string);
+        $string = str_replace('&amp;', '&', $string);
+        if($limit) {
+            $string = substr($string, 0, $limit);
+        }
+        return $string;
+    }
+
+}
+
+function page_url($page){
+    return url('page/'.$page['slug']);
+}

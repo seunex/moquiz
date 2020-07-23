@@ -47,7 +47,7 @@
             <br/>
             <br/>
             <div class="profile-wrapper__btn_container text-center">
-                <button type="submit" class="btn btn-primary btn-lg"> <?php echo lang('save_changes') ?> </button>
+                <button type="submit" class="btn btn-primary btn-lg btn-action"> <?php echo lang('save_changes') ?> </button>
                 <hr/>
                 <button type="button"
                         data-title="<?php echo lang('are-you-sure-you-want-to-delete-account'); ?>"
@@ -56,7 +56,7 @@
                         data-id="<?php echo md5(get_user_name()) ?>"
                         onclick="return delete_user(this)" class="btn btn-danger btn-lg"><?php echo lang('delete-account') ?></button>
             </div>
-            </form>
+            <?php echo form_close(); ?>
         </div>
     </div>
 </div>
