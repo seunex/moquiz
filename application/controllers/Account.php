@@ -33,9 +33,9 @@ class Account extends CI_Controller
     public function index()
     {
         if(!isLoggedIn()) return redirect(site_url());
-        $this->form_validation->set_rules('full_name', 'Full Name', 'required|trim');
-        $this->form_validation->set_rules('username', 'User Name', 'required|trim|alpha_numeric|min_length[3]|callback_check_username');
-        $this->form_validation->set_rules('email_address', 'Email Address', 'required|trim|valid_email|callback_check_email');
+        $this->form_validation->set_rules('full_name', lang('full_name'), 'required|trim');
+        $this->form_validation->set_rules('username', lang('username'), 'required|trim|alpha_numeric|min_length[3]|callback_check_username');
+        $this->form_validation->set_rules('email_address', lang('email_address'), 'required|trim|valid_email|callback_check_email');
         //$this->form_validation->set_rules('password','password','required|min_length[5]');
 
         if ($this->form_validation->run()) {
@@ -63,9 +63,9 @@ class Account extends CI_Controller
                 }
             }
             $file_name = 'avatar';
-            if(file_isset($file_name)){
+            if(file_isset($file_name) && $_FILES[$file_name]['size'] > 0){
+                //print_r($_FILES);die();
                 $upload_arr = $this->upload_avatar($file_name);
-                //print_r($upload_arr);die();
                 if($upload_arr['status'] == 1){
                     $data['avatar'] = $upload_arr['path'];
                 }else{
@@ -75,6 +75,7 @@ class Account extends CI_Controller
             if ($msg) {
                 $this->layouts->view('templates/default/account/profile', array(), array('user' => $user, 'msg' => $msg), true, true, array('active' => 'profile'));
             } else {
+                $data['updated_at'] = time();
                 $this->user_model->update_user($data, user_id());
                 $msg = lang('changes_saved_successfully');
                 $user = find_user(user_id());
@@ -134,7 +135,7 @@ class Account extends CI_Controller
         if ($result == 0)
             $response = true;
         else {
-            $this->form_validation->set_message('check_username', 'Username already exists');
+            $this->form_validation->set_message('check_username', lang('username-already-exists'));
             $response = false;
         }
         return $response;
@@ -146,7 +147,7 @@ class Account extends CI_Controller
         if ($result == 0) {
             return true;
         } else {
-            $this->form_validation->set_message('check_email', 'Email Address Already exists');
+            $this->form_validation->set_message('check_email', lang('email-already-exists'));
             return false;
         }
     }

@@ -28,7 +28,7 @@ class Auth extends CI_Controller {
             $userProfile = $twitter->getUserProfile();
 
             if($userProfile->identifier){
-                $username = $userProfile->identifier.'_'.$userProfile->displayName;
+                $username = str_replace(' ','-',$userProfile->identifier.'_'.$userProfile->displayName);
                 $full_name = $userProfile->firstName;
                 $email_address = ($userProfile->email) ? $userProfile->email : $userProfile->identifier.'@twitter.com';
                 //it has returned a user
@@ -70,7 +70,7 @@ class Auth extends CI_Controller {
             $userProfile = $twitter->getUserProfile();
 
             if($userProfile->identifier){
-                $username = $userProfile->identifier.'_'.$userProfile->displayName;
+                $username = str_replace(' ','-',$userProfile->identifier.'_'.$userProfile->displayName);
                 $full_name = $userProfile->firstName;
                 $email_address = ($userProfile->email) ? $userProfile->email : $userProfile->identifier.'@twitter.com';
                 //it has returned a user
@@ -111,7 +111,7 @@ class Auth extends CI_Controller {
             $userProfile = $twitter->getUserProfile();
 
             if($userProfile->identifier){
-                $username = $userProfile->identifier.'_'.$userProfile->displayName;
+                $username = str_replace(' ','-',$userProfile->identifier.'_'.$userProfile->displayName);
                 $full_name = $userProfile->firstName;
                 $email_address = ($userProfile->email) ? $userProfile->email : $userProfile->identifier.'@twitter.com';
                 //it has returned a user
@@ -183,16 +183,6 @@ class Auth extends CI_Controller {
                 'password'=>md5($this->input->post('password')),
             );
             $this->register_user($data);
-            /*$id = $this->user_model->insert($data);
-            $this->session->set_userdata('id',$id);
-            $user = $this->user_model->find_user($id);
-            $this->session->set_userdata('user',$user);
-            //if we are coming from another place let, take the user there
-            $redirect_url = $this->session->userdata('redirect_url');
-            if($redirect_url){
-               return redirect($redirect_url);
-            }
-            redirect('home');*/
         }else{
             $this->layouts->set_title(lang('welcome_title'));
             $this->layouts->view('templates/default/register/main',array(),array(),true);
@@ -200,6 +190,7 @@ class Auth extends CI_Controller {
     }
 
     protected function register_user($data){
+        $data['created_at'] = time();
         $id = $this->user_model->insert($data);
         $this->session->set_userdata('id',$id);
         $user = $this->user_model->find_user($id);

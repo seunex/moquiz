@@ -2,6 +2,114 @@
 
 class General_model extends CI_Model
 {
+    function get_stats($type){
+        switch ($type){
+            case 'user':
+                $query = $this->db->select('*')
+                    ->from('users')
+                    ->order_by('created_at', 'DESC')
+                    ->get();
+                return count($query->result_array());
+                break;
+            case 'quiz':
+                $query = $this->db->select('*')
+                    ->from('quiz_details')
+                    ->order_by('time', 'DESC')
+                    ->get();
+                return count($query->result_array());
+                break;
+
+            case 'participants':
+                $query = $this->db->select('*')
+                    ->from('quiz_result_overall')
+                    ->order_by('time', 'DESC')
+                    ->get();
+                return count($query->result_array());
+                break;
+        }
+    }
+    function get_graph_data($type, $year = null){
+        switch ($type){
+            case 'user':
+                $year = ($year) ? $year : date('Y');
+                $start = strtotime($year.'-01-01');
+                $end = strtotime($year.'-12-31');
+                $array = array(1 => 0, 2 => 0,3=>0,4=>0,5=>0,6=>0,7=>0,8=>0,9=>0,10=>0,11=>0,12=>0);
+                $query = $this->db->select('created_at')
+                    ->from('users')
+                    ->where('created_at >= ', $start)
+                    ->where('created_at <= ', $end)
+                    ->where('created_at <= ', $end)
+                    ->order_by('created_at', 'DESC')
+                    ->get();
+                $users = $query->result_array();
+                foreach ($users as $user){
+                    $m = date('n',$user['created_at']); //month;
+                    if(isset($array[$m])){
+                        $array[$m] = $array[$m] + 1;
+                    }else{
+                        $array[$m] = 1;
+                    }
+                }
+                ksort($array);
+
+                return array_values($array);
+                break;
+
+            case 'quiz':
+                $year = ($year) ? $year : date('Y');
+                $start = strtotime($year.'-01-01');
+                $end = strtotime($year.'-12-31');
+                $array = array(1 => 0, 2 => 0,3=>0,4=>0,5=>0,6=>0,7=>0,8=>0,9=>0,10=>0,11=>0,12=>0);
+                $query = $this->db->select('time')
+                    ->from('quiz_details')
+                    ->where('time >= ', $start)
+                    ->where('time <= ', $end)
+                    ->where('time <= ', $end)
+                    ->order_by('time', 'DESC')
+                    ->get();
+                $users = $query->result_array();
+                foreach ($users as $user){
+                    $m = date('n',$user['time']); //month;
+                    if(isset($array[$m])){
+                        $array[$m] = $array[$m] + 1;
+                    }else{
+                        $array[$m] = 1;
+                    }
+                }
+                ksort($array);
+
+                return array_values($array);
+                break;
+
+                case 'participants':
+                $year = ($year) ? $year : date('Y');
+                $start = strtotime($year.'-01-01');
+                $end = strtotime($year.'-12-31');
+                $array = array(1 => 0, 2 => 0,3=>0,4=>0,5=>0,6=>0,7=>0,8=>0,9=>0,10=>0,11=>0,12=>0);
+                $query = $this->db->select('time')
+                    ->from('quiz_result_overall')
+                    ->where('time >= ', $start)
+                    ->where('time <= ', $end)
+                    ->where('time <= ', $end)
+                    ->order_by('time', 'DESC')
+                    ->get();
+                $users = $query->result_array();
+                foreach ($users as $user){
+                    $m = date('n',$user['time']); //month;
+                    if(isset($array[$m])){
+                        $array[$m] = $array[$m] + 1;
+                    }else{
+                        $array[$m] = 1;
+                    }
+                }
+                ksort($array);
+
+                return array_values($array);
+                break;
+        }
+    }
+
     function delete_page($id){
         $this->db->delete('static_pages', array('id' => $id));
     }

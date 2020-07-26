@@ -13,13 +13,15 @@ class Admincp extends CI_Controller
         $this->load->language('main');
         $this->load->database();
         $this->configs = $this->general_model->configs();
+        if(!is_admin()) return redirect(url(''));
     }
 
     public function index()
     {
         if (!isLoggedIn()) return redirect(site_url());
         $this->layouts->set_title(lang('website-settings'));
-        $this->layouts->view('templates/default/admincp/index', array(), array('quiz' => ''), true, true, array('active' => 'admin-panel'));
+        $content = $this->load->view('templates/default/admincp/index', array(), true);
+        $this->layouts->view('templates/default/admincp/layout', array(), array('content' => $content, 'active' => 'dashboard'), true, true, array());
     }
 
     public function pages($action = null)

@@ -25,7 +25,8 @@ class Layouts
     //set the page title
     public function set_title($title)
     {
-        $this->title = $title;
+        $this->title = config('website-title', 'FriendsQuizzy').' | '.$title;
+
     }
 
 

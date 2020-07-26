@@ -140,6 +140,7 @@ function session_get($name,$default= null){
     $CI = get_instance();
     $r = $CI->session->userdata($name);
     if(!$r) return $default;
+    return $r;
 }
 
 function find_user($id){
@@ -226,4 +227,50 @@ if(!function_exists('sanitizeText')) {
 
 function page_url($page){
     return url('page/'.$page['slug']);
+}
+
+function get_pages(){
+    $CI = get_instance();
+    $CI->load->model('quiz_model');
+    $pages = $CI->general_model->get_pages();
+    return $pages;
+}
+
+function get_months(){
+    $month = array();
+    $month[] = lang('january');
+    $month[] = lang('february');
+    $month[] = lang('march');
+    $month[] = lang('april');
+    $month[] = lang('may');
+    $month[] = lang('june');
+    $month[] = lang('july');
+    $month[] = lang('august');
+    $month[] = lang('september');
+    $month[] = lang('october');
+    $month[] = lang('november');
+    $month[] = lang('december');
+    return $month;
+}
+
+function get_graph_data($type,$year = null){
+    $CI = get_instance();
+    $CI->load->model('general_model');
+    $data = $CI->general_model->get_graph_data($type);
+    return $data;
+}
+
+function get_statistics($type){
+    $CI = get_instance();
+    $CI->load->model('general_model');
+    $data = $CI->general_model->get_stats($type);
+    return $data;
+}
+
+function language_url($slug){
+    return url('language/switchLang/'.$slug);
+}
+
+function get_active_lang(){
+    return session_get('site_lang','english');
 }

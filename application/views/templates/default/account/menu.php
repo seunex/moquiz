@@ -2,12 +2,13 @@
     <div class="user-home-wrapper">
         <div class="user-side-bar-menu">
             <ul>
-                <li class="<?php echo ($active == 'home') ? 'active' : null; ?>" data-title="Home"><a href="<?php echo site_url('home') ?>"> <i data-feather="home"></i> Home </a></li>
-                <li class="<?php echo ($active == 'create-quiz') ? 'active' : null; ?>"  data-title="Create a Quiz"><a href="<?php echo site_url('quiz/create') ?>"><i data-feather="plus-square"></i>Create a Quiz </a></li>
-                <li class="<?php echo ($active == 'profile') ? 'active' : null; ?>"  data-title="Profile"><a href="<?php echo site_url('account') ?>"><i data-feather="user"></i>Profile </a></li>
-                <!--<li class="<?php /*echo ($active == 'score-board') ? 'active' : null; */?>" data-toggle="tooltip" data-title="Score Board"><a href=""> <i data-feather="monitor"></i>Score Board </a></li>-->
-                <li class="<?php echo ($active == 'admin-panel') ? 'active' : null; ?>"  data-title="Admin Panel"><a href="<?php echo site_url('admincp') ?>"> <i data-feather="settings"></i> Admin Panel </a></li>
-                <li class="<?php echo ($active == 'logout') ? 'active' : null; ?>"  data-title="Logout"><a href="<?php echo site_url('logout') ?>"> <i data-feather="lock"></i>Logout </a></li>
+                <li class="<?php echo ($active == 'home') ? 'active' : null; ?>" data-title="<?php echo lang('home') ?>"><a href="<?php echo site_url('home') ?>"> <i data-feather="home"></i> <?php echo lang('home') ?> </a></li>
+                <li class="<?php echo ($active == 'create-quiz') ? 'active' : null; ?>"  data-title="<?php echo lang('create_a_quiz') ?>"><a href="<?php echo site_url('quiz/create') ?>"><i data-feather="plus-square"></i><?php echo lang('create_a_quiz') ?></a></li>
+                <li class="<?php echo ($active == 'profile') ? 'active' : null; ?>"  data-title="<?php echo lang('profile') ?>"><a href="<?php echo site_url('account') ?>"><i data-feather="user"></i><?php echo lang('profile') ?></a></li>
+                <?php if(is_admin()):; ?>
+                <li class="<?php echo ($active == 'admin-panel') ? 'active' : null; ?>"  data-title="<?php echo lang('admin_panel') ?>"><a href="<?php echo site_url('admincp') ?>"> <i data-feather="settings"></i> <?php echo lang('admin_panel') ?> </a></li>
+                <?php endif; ?>
+                <li class="<?php echo ($active == 'logout') ? 'active' : null; ?>"  data-title="<?php echo lang('logout') ?>"><a href="<?php echo site_url('logout') ?>"> <i data-feather="lock"></i> <?php echo lang('logout'); ?></a></li>
             </ul>
         </div>
         <?php echo $content; ?>

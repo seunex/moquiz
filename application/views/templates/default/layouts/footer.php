@@ -1,4 +1,19 @@
 <?php $this->view('templates/default/register/modal'); ?>
+<?php $pages = get_pages(); ?>
+<footer class="text-center py-3 footer-wrapper border-top">
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <?php foreach($pages as $page): ?>
+            <a href="<?php echo page_url($page) ?>" class="bottom-page-link"><?php echo $page['title']; ?></a>
+            <?php endforeach;; ?>
+        </div>
+    </div><br/>
+    <div class="row">
+        <div class="col-12"><?php echo lang('copyright'); ?> <?php echo date('Y'); ?> <?php echo config('website-title', 'FriendsQuizzy') ?>.<?php echo lang('all-rights-reserved') ?> </div>
+    </div>
+</div>
+</footer>
 </body>
 <script>
     var base_url = '<?php echo site_url(); ?>'
