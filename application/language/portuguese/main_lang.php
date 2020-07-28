@@ -201,5 +201,9 @@ $lang['email_address'] = "Email Address";
 $lang['participants'] = "Participants";
 $lang['change-language'] = "Change language";
 $lang['hi'] = "Hi";
+$lang['home'] = "Home";
+$lang['profile'] = "Profile";
+$lang['admin_panel'] = "Admin Panel";
+$lang['logout'] = "Logout";
 
 

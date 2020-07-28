@@ -55,6 +55,8 @@ button:hover,
     border-radius: 20px;
     background: #fff;
     overflow: hidden;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 /**Banners Styles **/
@@ -917,4 +919,99 @@ input:checked + .slider.unselect {
 .graph-container{
     width: 100%;
     margin-bottom: 40px;
+}
+
+/** Mobile menu display **/
+.mobile-menu-row{
+    display: none;
+    /*text-align: center;*/
+    padding: 20px;
+}
+
+.mobile-menu-row ul{
+    display: grid;
+    grid-gap: 30px;
+    grid-template-columns: repeat(5,1fr);
+    text-align: center;
+}
+
+.mobile-menu-row ul svg{
+    color : #fff;
+}
+.mobile-menu-row ul li{
+    display: inline-block;
+}
+
+/**Respoinsiveness **/
+@media (max-width: 768px) {
+    .user-home-content{
+        margin-left : 0;
+        padding: 5px;
+    }
+    .user-side-bar-menu{
+        display: none;
+    }
+
+    .user-home-content h3{
+        font-size: 16px;
+    }
+
+    .user-home-content__my_quizzes table th{
+        min-width: 200px !important;
+    }
+
+    .dashboard-index__box{
+        max-width: 100%;
+        display: block;
+        position: relative;
+        margin: 10px auto;
+        flex: 0 0 100%;
+        height: auto !important;
+    }
+
+    .img-table-quiz{
+        height: 50px;
+        width : 50px;
+    }
+
+    .title-noquiz-wrapper{
+        margin-top: 0;
+    }
+    /** mobile menu**/
+    .mobile-menu-row{
+        display: block;
+    }
+
+    .create-quiz-wrapper .quiz-title-input{
+        font-size: 18px !important;
+    }
+
+    .create-quiz-wrapper .submit-q-title{
+        font-size: 16px;
+    }
+
+    .create-quiz-wrapper{
+        margin-top: 0;
+    }
+
+    .qq-input-and-image{
+        margin-bottom: 20px;
+    }
+    .create-quiz-wrapper .submit-q-next, .create-quiz-wrapper .submit-q-prev, .create-quiz-wrapper .submit-save-quiz{
+        font-size: 12px;
+    }
+
+    /** Landing page **/
+    .container-inner-landing-page{
+        margin-left: 0;
+        margin-right: 0;
+        border-radius: 0;
+    }
+    .homepage-left-handside{
+        display: none;
+    }
+
+    .home-page-wrapper{
+        margin-top:30px;
+    }
 }

@@ -37,7 +37,8 @@
             background: <?php echo config('background-color','#DCD2F0') ?>;
         }
 
-        .user-side-bar-menu {
+        .user-side-bar-menu,
+        .mobile-menu-header{
             background: <?php echo config('side-bar-color','#581E95') ?>
         }
 
