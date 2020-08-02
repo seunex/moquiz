@@ -156,7 +156,6 @@ class Quiz_model extends CI_Model
 
     function get_all_quiz_paticipants($quiz_id, $limit = 2, $offset = 0)
     {
-        ///$query = $this->db->query("SELECT * FROM quiz_result_overall WHERE quiz_id='{$quiz_id}' ORDER BY correct_questions DESC");
         $query = $this->db->select('*')
             ->from('quiz_result_overall')
             ->where('quiz_id', $quiz_id)

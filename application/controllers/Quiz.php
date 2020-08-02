@@ -23,7 +23,7 @@ class Quiz extends CI_Controller
         if (post_isset('title')) {
             //echo '</pre>', print_r($_POST), '</pre>';die();
             //echo $this->input->post('title');
-            $quiz_title = $this->input->post('title');
+            $quiz_title = input('title');
             $qid = $this->quiz_model->add_quiz_details(array(
                 'status' => 1,
                 'featured' => 0,
@@ -55,7 +55,7 @@ class Quiz extends CI_Controller
             $i = 1;
             while (post_isset('question_' . $i)) {
                 $questio_image_file_name = md5($quiz_title . time() . $i);
-                $question_text = $this->input->post('question_' . $i);
+                $question_text = input('question_' . $i);
                 $question_file_name = 'qimage_' . $i;
                 $question_check = false; //checking if we have the right questions
                 $question_data = array();
@@ -126,8 +126,8 @@ class Quiz extends CI_Controller
                             $answer_text_name = 'answer_text_' . $i . '_' . $answer_digit;
                             $answer_image_name = 'answer_image_' . $i . '_' . $answer_digit;
                             $answer_image_file_name = md5($answer_image_name . time());
-                            if ($this->input->post($answer_text_name)) {
-                                $answer_data['txt'] = $this->input->post($answer_text_name);
+                            if (input($answer_text_name)) {
+                                $answer_data['txt'] = input($answer_text_name);
                             }
                             if ($this->upload->do_upload($answer_image_name)) {
                                 $file_data = $this->upload->data();
@@ -143,7 +143,7 @@ class Quiz extends CI_Controller
                             }
 
                             //correct_1_2
-                            if ($this->input->post('correct_' . $i . '_' . $answer_digit) == 1) {
+                            if (input('correct_' . $i . '_' . $answer_digit) == 1) {
                                 $answer_data['answer'] = 1;
                             }
                             $this->quiz_model->add_answer($answer_data);
@@ -214,8 +214,8 @@ class Quiz extends CI_Controller
         if (post_isset('ajax')) {
             //echo '</pre>', print_r($_POST), '</pre>';die();
             //echo $this->input->post('title');
-            $quiz_id = $this->input->post('quiz_id');
-            $answers = $this->input->post('answer');
+            $quiz_id = input('quiz_id');
+            $answers = input('answer');
             $user_id = (int)user_id();
             $question_count = 0;
             $correct_questions_count = 0;

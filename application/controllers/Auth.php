@@ -143,8 +143,8 @@ class Auth extends CI_Controller {
 	{
         $this->form_validation->set_rules('email_address','Email Address','required|trim');
         if($this->form_validation->run()){
-            $username = $this->input->post('email_address');
-            $password = $this->input->post('password');
+            $username = input('email_address');
+            $password = input('password');
 
             $user = $this->user_model->login_user($username,$password);
             if($user){
@@ -177,10 +177,10 @@ class Auth extends CI_Controller {
         if($this->form_validation->run()){
             //form success
             $data = array(
-                'username'=>$this->input->post('username'),
-                'full_name'=>$this->input->post('full_name'),
-                'email_address'=>$this->input->post('email_address'),
-                'password'=>md5($this->input->post('password')),
+                'username'=>input('username'),
+                'full_name'=>input('full_name'),
+                'email_address'=>input('email_address'),
+                'password'=>md5(input('password')),
             );
             $this->register_user($data);
         }else{

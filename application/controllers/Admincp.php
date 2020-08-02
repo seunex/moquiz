@@ -46,9 +46,9 @@ class Admincp extends CI_Controller
             $this->form_validation->set_rules('content', lang('page-content'), 'required|trim');
             if ($this->form_validation->run()) {
                 $data = array(
-                    'title' => $this->input->post('title'),
-                    'slug' => toAscii($this->input->post('title')),
-                    'content' => $this->input->post('content')
+                    'title' => input('title'),
+                    'slug' => toAscii(input('title')),
+                    'content' => purify_html($this->input->post('content'))
                 );
                 $this->general_model->add_page($data);
                 return redirect(url('admincp/pages'));
@@ -65,11 +65,11 @@ class Admincp extends CI_Controller
             $this->form_validation->set_rules('title', lang('page-title'), 'required|trim');
             $this->form_validation->set_rules('content', lang('page-content'), 'required|trim');
             if ($this->form_validation->run()) {
-                $pid = $this->input->post('pid');
+                $pid = input('pid');
                 $data = array(
-                    'title' => $this->input->post('title'),
-                    'slug' => toAscii($this->input->post('title')),
-                    'content' => $this->input->post('content')
+                    'title' => input('title'),
+                    'slug' => toAscii(input('title')),
+                    'content' => purify_html($this->input->post('content'))
                 );
                 //print_r($data);die();
                 $this->general_model->save_page($data,$pid);
@@ -90,32 +90,35 @@ class Admincp extends CI_Controller
         $this->layouts->set_title(lang('website-settings'));
         $settings = array();
         $msg = null;
-        if ($this->input->post('website-title')) {
-            $val['website-title'] = $this->input->post('website-title');
-            $val['website-description'] = $this->input->post('website-description');
-            $val['website-keywords'] = $this->input->post('website-keywords');
-            $val['website-google-analytics'] = $this->input->post('website-google-analytics');
-            $val['ads-code'] = $this->input->post('ads-code');
+        if (input('website-title')) {
+            $val['website-title'] = input('website-title');
+            $val['website-description'] = input('website-description');
+            $val['website-keywords'] = input('website-keywords');
+
+            //html purify
+            //$clean_html = $purifier->purify($dirty_html);
+            $val['website-google-analytics'] = input('website-google-analytics');
+            $val['ads-code'] = purify_html($this->input->post('ads-code'));
 
             //appearance
-            $val['background-color'] = $this->input->post('background-color');
-            $val['btn-action-color'] = $this->input->post('btn-action-color');
-            $val['side-bar-color'] = $this->input->post('side-bar-color');
+            $val['background-color'] = input('background-color');
+            $val['btn-action-color'] = input('btn-action-color');
+            $val['side-bar-color'] = input('side-bar-color');
 
             //social
-            $val['allow-facebook-signup'] = $this->input->post('allow-facebook-signup');
-            $val['facebook-key'] = $this->input->post('facebook-key');
-            $val['facebook-secret'] = $this->input->post('facebook-secret');
+            $val['allow-facebook-signup'] = input('allow-facebook-signup');
+            $val['facebook-key'] = input('facebook-key');
+            $val['facebook-secret'] = input('facebook-secret');
 
             //twitter
-            $val['allow-twitter-signup'] = $this->input->post('allow-twitter-signup');
-            $val['twitter-key'] = $this->input->post('twitter-key');
-            $val['twitter-secret'] = $this->input->post('twitter-secret');
+            $val['allow-twitter-signup'] = input('allow-twitter-signup');
+            $val['twitter-key'] = input('twitter-key');
+            $val['twitter-secret'] = input('twitter-secret');
 
             //google
-            $val['allow-google-signup'] = $this->input->post('allow-google-signup');
-            $val['google-key'] = $this->input->post('google-key');
-            $val['google-secret'] = $this->input->post('google-secret');
+            $val['allow-google-signup'] = input('allow-google-signup');
+            $val['google-key'] = input('google-key');
+            $val['google-secret'] = input('google-secret');
 
             $this->general_model->save_configs($val);
             $msg = lang('changes-saved-successfully');

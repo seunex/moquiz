@@ -2,8 +2,9 @@
 
 class General_model extends CI_Model
 {
-    function get_stats($type){
-        switch ($type){
+    function get_stats($type)
+    {
+        switch ($type) {
             case 'user':
                 $query = $this->db->select('*')
                     ->from('users')
@@ -28,13 +29,15 @@ class General_model extends CI_Model
                 break;
         }
     }
-    function get_graph_data($type, $year = null){
-        switch ($type){
+
+    function get_graph_data($type, $year = null)
+    {
+        switch ($type) {
             case 'user':
                 $year = ($year) ? $year : date('Y');
-                $start = strtotime($year.'-01-01');
-                $end = strtotime($year.'-12-31');
-                $array = array(1 => 0, 2 => 0,3=>0,4=>0,5=>0,6=>0,7=>0,8=>0,9=>0,10=>0,11=>0,12=>0);
+                $start = strtotime($year . '-01-01');
+                $end = strtotime($year . '-12-31');
+                $array = array(1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 0, 9 => 0, 10 => 0, 11 => 0, 12 => 0);
                 $query = $this->db->select('created_at')
                     ->from('users')
                     ->where('created_at >= ', $start)
@@ -43,11 +46,11 @@ class General_model extends CI_Model
                     ->order_by('created_at', 'DESC')
                     ->get();
                 $users = $query->result_array();
-                foreach ($users as $user){
-                    $m = date('n',$user['created_at']); //month;
-                    if(isset($array[$m])){
+                foreach ($users as $user) {
+                    $m = date('n', $user['created_at']); //month;
+                    if (isset($array[$m])) {
                         $array[$m] = $array[$m] + 1;
-                    }else{
+                    } else {
                         $array[$m] = 1;
                     }
                 }
@@ -58,9 +61,9 @@ class General_model extends CI_Model
 
             case 'quiz':
                 $year = ($year) ? $year : date('Y');
-                $start = strtotime($year.'-01-01');
-                $end = strtotime($year.'-12-31');
-                $array = array(1 => 0, 2 => 0,3=>0,4=>0,5=>0,6=>0,7=>0,8=>0,9=>0,10=>0,11=>0,12=>0);
+                $start = strtotime($year . '-01-01');
+                $end = strtotime($year . '-12-31');
+                $array = array(1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 0, 9 => 0, 10 => 0, 11 => 0, 12 => 0);
                 $query = $this->db->select('time')
                     ->from('quiz_details')
                     ->where('time >= ', $start)
@@ -69,11 +72,11 @@ class General_model extends CI_Model
                     ->order_by('time', 'DESC')
                     ->get();
                 $users = $query->result_array();
-                foreach ($users as $user){
-                    $m = date('n',$user['time']); //month;
-                    if(isset($array[$m])){
+                foreach ($users as $user) {
+                    $m = date('n', $user['time']); //month;
+                    if (isset($array[$m])) {
                         $array[$m] = $array[$m] + 1;
-                    }else{
+                    } else {
                         $array[$m] = 1;
                     }
                 }
@@ -82,11 +85,11 @@ class General_model extends CI_Model
                 return array_values($array);
                 break;
 
-                case 'participants':
+            case 'participants':
                 $year = ($year) ? $year : date('Y');
-                $start = strtotime($year.'-01-01');
-                $end = strtotime($year.'-12-31');
-                $array = array(1 => 0, 2 => 0,3=>0,4=>0,5=>0,6=>0,7=>0,8=>0,9=>0,10=>0,11=>0,12=>0);
+                $start = strtotime($year . '-01-01');
+                $end = strtotime($year . '-12-31');
+                $array = array(1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 0, 9 => 0, 10 => 0, 11 => 0, 12 => 0);
                 $query = $this->db->select('time')
                     ->from('quiz_result_overall')
                     ->where('time >= ', $start)
@@ -95,11 +98,11 @@ class General_model extends CI_Model
                     ->order_by('time', 'DESC')
                     ->get();
                 $users = $query->result_array();
-                foreach ($users as $user){
-                    $m = date('n',$user['time']); //month;
-                    if(isset($array[$m])){
+                foreach ($users as $user) {
+                    $m = date('n', $user['time']); //month;
+                    if (isset($array[$m])) {
                         $array[$m] = $array[$m] + 1;
-                    }else{
+                    } else {
                         $array[$m] = 1;
                     }
                 }
@@ -110,9 +113,11 @@ class General_model extends CI_Model
         }
     }
 
-    function delete_page($id){
+    function delete_page($id)
+    {
         $this->db->delete('static_pages', array('id' => $id));
     }
+
     function get_pages()
     {
         $query = $this->db->select('*')
@@ -121,7 +126,7 @@ class General_model extends CI_Model
         return $query->result_array();
     }
 
-    function save_page($data,$id)
+    function save_page($data, $id)
     {
         $this->db->where('id', $id);
         $this->db->update('static_pages', $data);
@@ -185,9 +190,19 @@ class General_model extends CI_Model
         $configs = array();
         foreach ($val as $key => $value) {
             if ($this->setting_exists($key)) {
-                if ($update) $this->db->query("UPDATE settings SET `value`='{$value}' WHERE `val`='{$key}'");
+                //if ($update) $this->db->query("UPDATE settings SET `value`='{$value}' WHERE `val`='{$key}'");
+                if ($update) {
+                    $data = array(
+                        'value'=>$value,
+                    );
+                    $this->db->where('val', $key);
+                    $this->db->update('settings', $data);
+                }
             } else {
-                $this->db->query("INSERT INTO settings (`val`,`value`) VALUES('{$key}', '{$value}')");
+                $arr['val'] = $key;
+                $arr['value'] = $value;
+                $this->db->insert('settings', $arr);
+                //$this->db->query("INSERT INTO settings (`val`,`value`) VALUES('{$key}', '{$value}')");
             }
         }
         return $configs;

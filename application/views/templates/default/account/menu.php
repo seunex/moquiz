@@ -1,6 +1,6 @@
 <div class="container">
     <div class="user-home-wrapper">
-        <div class="row mobile-menu-row mobile-menu-header">
+        <div class="mobile-menu-row mobile-menu-header">
             <ul>
                 <li class="<?php echo ($active == 'home') ? 'active' : null; ?>" data-title="<?php echo lang('home') ?>"><a href="<?php echo site_url('home') ?>"> <i data-feather="home"></i></a></li>
                 <li class="<?php echo ($active == 'create-quiz') ? 'active' : null; ?>"  data-title="<?php echo lang('create_a_quiz') ?>"><a href="<?php echo site_url('quiz/create') ?>"><i data-feather="plus-square"></i></a></li>
@@ -11,7 +11,6 @@
                 <li class="<?php echo ($active == 'logout') ? 'active' : null; ?>"  data-title="<?php echo lang('logout') ?>"><a href="<?php echo site_url('logout') ?>"> <i data-feather="lock"></i></a></li>
             </ul>
         </div>
-
         <div class="user-side-bar-menu">
             <ul>
                 <li class="<?php echo ($active == 'home') ? 'active' : null; ?>" data-title="<?php echo lang('home') ?>"><a href="<?php echo site_url('home') ?>"> <i data-feather="home"></i> <?php echo lang('home') ?> </a></li>

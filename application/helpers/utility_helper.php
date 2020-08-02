@@ -274,3 +274,29 @@ function language_url($slug){
 function get_active_lang(){
     return session_get('site_lang','english');
 }
+
+function input($name,$type = 'post', $xss = true,$default = null){
+    $CI = get_instance();
+    //$CI->load->libary('form_validation');
+    $value = $default;
+    if($type == 'post'){
+        $value = $CI->input->post($name,$xss);
+    }
+    return $value;
+}
+
+function purify_html($content){
+    //html purify
+    require_once(APPPATH.'libraries/htmlpurifier/HTMLPurifier.auto.php');
+
+    $config = HTMLPurifier_Config::createDefault();
+    $def = $config->getHTMLDefinition(true);
+    $def->addAttribute('ins', 'data-ad-client', 'Text');
+    $def->addAttribute('ins', 'data-ad-slot', 'Text');
+    $def->addAttribute('ins', 'data-ad-format', 'Text');
+    $def->addAttribute('ins', 'data-full-width-responsive', 'Text');
+
+    $purifier = new HTMLPurifier($config);
+    $purified = $purifier->purify($content);
+    return $purified;
+}

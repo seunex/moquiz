@@ -43,13 +43,13 @@ class Account extends CI_Controller
             $msg = '';
             $user = get_user();
             $data = array(
-                'username' => $this->input->post('username'),
-                'full_name' => $this->input->post('full_name'),
-                'email_address' => $this->input->post('email_address'),
+                'username' => input('username'),
+                'full_name' => input('full_name'),
+                'email_address' => input('email_address'),
             );
-            $old_password = $this->input->post('old_password');
-            $new_password = $this->input->post('new_password');
-            $new_password_c = $this->input->post('new_password_c');
+            $old_password = input('old_password');
+            $new_password = input('new_password');
+            $new_password_c = input('new_password_c');
             if ($new_password && $new_password_c && $old_password) {
                 //we want to change the password
                 if ($new_password_c !== $new_password) {
