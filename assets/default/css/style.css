@@ -254,6 +254,7 @@ button:hover,
     box-shadow: 0 0 10px #aaa;
     margin-left: 0;
     margin-right: 0;
+    margin-top: 10px;
 }
 
 .user-side-bar-menu {
@@ -964,6 +965,18 @@ input:checked + .slider.unselect {
 }
 .mobile-menu-row ul li{
     display: inline-block;
+}
+
+/** Installation class**/
+.installation-wrapper-container{
+    max-width: 700px;
+    margin:0 auto;
+    display: block;
+}
+
+.installation-wrapper-container .row_top_menu{
+    margin:0 auto;
+    display: block;
 }
 
 /**Respoinsiveness **/

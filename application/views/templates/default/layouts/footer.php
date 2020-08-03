@@ -3,11 +3,13 @@
     <?php echo config('ads-code'); ?>
     <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
 <?php endif; ?>
-<?php $pages = get_pages(); ?>
+
+<?php if(!is_install()): ?>
 <footer class="text-center py-3 footer-wrapper border-top">
 <div class="container">
     <div class="row">
         <div class="col-12">
+            <?php $pages = get_pages(); ?>
             <?php foreach($pages as $page): ?>
             <a href="<?php echo page_url($page) ?>" class="bottom-page-link"><?php echo strtoupper($page['title']); ?></a>
             <?php endforeach;; ?>
@@ -18,6 +20,7 @@
     </div>
 </div>
 </footer>
+<?php endif; ?>
 </body>
 <script>
     var base_url = '<?php echo site_url(); ?>'

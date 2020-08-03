@@ -2,6 +2,135 @@
 
 class General_model extends CI_Model
 {
+    function database_install()
+    {
+        $this->db->query("CREATE TABLE IF NOT EXISTS `users` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `full_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email_address` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `role` int(11) NOT NULL DEFAULT '0',
+  `active` int(11) NOT NULL DEFAULT '1',
+  `banned` int(11) NOT NULL DEFAULT '0',
+  `created_at` int(11) NOT NULL,
+  `updated_at` int(11) NOT NULL,
+  `avatar` text COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;");
+
+        $this->db->query("CREATE TABLE IF NOT EXISTS `static_pages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `content` text COLLATE utf8_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;");
+
+        $this->db->query("CREATE TABLE IF NOT EXISTS `settings` (
+  `val` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `value` text COLLATE utf8_unicode_ci NOT NULL,
+  UNIQUE KEY `val` (`val`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;");
+
+        $this->db->query("CREATE TABLE IF NOT EXISTS `quiz_results` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `quiz_id` int(11) DEFAULT NULL,
+  `image` text,
+  `text` varchar(255) DEFAULT NULL,
+  `description` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;");
+
+        $this->db->query("CREATE TABLE IF NOT EXISTS `quiz_result_overall` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `quiz_id` int(11) DEFAULT NULL,
+  `question_count` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `correct_questions` int(11) DEFAULT NULL,
+  `time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;");
+
+        $this->db->query("CREATE TABLE IF NOT EXISTS `quiz_result_by_question` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `quiz_id` int(11) DEFAULT NULL,
+  `question_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `correct` int(11) DEFAULT NULL,
+  `time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;");
+
+        $this->db->query("CREATE TABLE IF NOT EXISTS `quiz_questions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `quiz_id` int(11) NOT NULL DEFAULT '0',
+  `correct` int(11) NOT NULL DEFAULT '0',
+  `time` int(11) NOT NULL DEFAULT '0',
+  `image` text NOT NULL,
+  `text` text NOT NULL,
+  `source` text NOT NULL,
+  `description` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;");
+
+        $this->db->query("CREATE TABLE IF NOT EXISTS `quiz_friend_answers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `quiz_id` int(11) DEFAULT NULL,
+  `question_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `answer_id` int(11) DEFAULT NULL,
+  `choosen_answer` int(11) DEFAULT NULL,
+  `time` int(11) DEFAULT NULL,
+  `correct` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;");
+
+        $this->db->query("CREATE TABLE IF NOT EXISTS `quiz_details` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `status` int(11) NOT NULL DEFAULT '0',
+  `featured` int(11) NOT NULL DEFAULT '0',
+  `views` int(11) NOT NULL DEFAULT '0',
+  `user_id` int(11) NOT NULL DEFAULT '0',
+  `title` varchar(250) NOT NULL,
+  `slug` varchar(250) NOT NULL,
+  `time` int(11) NOT NULL,
+  `category` varchar(250) NOT NULL,
+  `description` text NOT NULL,
+  `tags` text NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `preview_image` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;");
+
+
+        $this->db->query("CREATE TABLE IF NOT EXISTS `quiz_answers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `question_id` int(11) DEFAULT NULL,
+  `quiz_id` int(11) DEFAULT NULL,
+  `time` int(11) DEFAULT NULL,
+  `image` text,
+  `txt` text,
+  `answer` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;");
+
+        //add
+        $pages = array(
+            array(
+                'title' => 'Privacy Policy',
+                'content' => 'put disclaimer here',
+                'slug' => toAscii('Privacy Policy')),
+            array(
+                'title' => 'Disclaimer',
+                'content' => 'put declaimer here',
+                'slug'=>toAscii('Disclaimer'),
+            ));
+        foreach ($pages as $p) {
+            $this->add_page($p);
+        }
+    }
+
     function get_stats($type)
     {
         switch ($type) {
@@ -178,9 +307,15 @@ class General_model extends CI_Model
     function configs()
     {
         $configs = array();
-        $query = $this->db->query("SELECT * FROM settings");
-        foreach ($query->result() as $row) {
-            $configs[$row->val] = $row->value;
+        //$query = $this->db->query("SELECT * FROM settings");
+        $query = $this->db->select('*')
+            ->from('settings')
+            ->get();
+        //return $query->result_array();
+        if($query->result_array()){
+            foreach ($query->result_array() as $row) {
+                $configs[$row['val']] = $row['value'];
+            }
         }
         return $configs;
     }
@@ -193,7 +328,7 @@ class General_model extends CI_Model
                 //if ($update) $this->db->query("UPDATE settings SET `value`='{$value}' WHERE `val`='{$key}'");
                 if ($update) {
                     $data = array(
-                        'value'=>$value,
+                        'value' => $value,
                     );
                     $this->db->where('val', $key);
                     $this->db->update('settings', $data);

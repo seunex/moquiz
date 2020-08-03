@@ -290,6 +290,11 @@ function purify_html($content){
     require_once(APPPATH.'libraries/htmlpurifier/HTMLPurifier.auto.php');
 
     $config = HTMLPurifier_Config::createDefault();
+    $cache_serializer_path = FCPATH.'storage/cache/htmlpurifier';
+    if(!is_dir($cache_serializer_path)) {
+        @mkdir($cache_serializer_path, 0777, true);
+    }
+    $config->set('Cache.SerializerPath', $cache_serializer_path);
     $def = $config->getHTMLDefinition(true);
     $def->addAttribute('ins', 'data-ad-client', 'Text');
     $def->addAttribute('ins', 'data-ad-slot', 'Text');
@@ -299,4 +304,32 @@ function purify_html($content){
     $purifier = new HTMLPurifier($config);
     $purified = $purifier->purify($content);
     return $purified;
+}
+
+function segment($index){
+    $CI = get_instance();
+    $s = $CI->uri->segment($index);;
+    return $s;
+}
+
+function is_install(){
+   return  segment(1) == 'install';
+}
+
+function run_database_install(){
+    $CI = get_instance();
+    $CI->load->model('general_model');
+    $CI->general_model->database_install();
+    return true;
+}
+
+function get_db_config(){
+    $arr = include(FCPATH . "config.php");
+    $config['hostname'] = $arr['db-host-name'];
+    $config['username'] = $arr['db-user-name'];
+    $config['password'] = $arr['db-password'];
+    $config['database'] = $arr['db-name'];
+    $config['dbdriver'] = 'mysqli';
+    $config['db_debug'] = false;
+    return $config;
 }

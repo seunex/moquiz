@@ -11,7 +11,7 @@ class Account extends CI_Controller
         $this->load->model(array('user_model', 'general_model','quiz_model'));
         $this->load->helper('language');
         $this->load->language('main');
-        $this->load->database();
+        $this->load->database(get_db_config());
         $this->configs = $this->general_model->configs();
     }
 

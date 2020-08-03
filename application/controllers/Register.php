@@ -10,7 +10,7 @@ class Register extends CI_Controller {
         $this->load->language('main');
         $this->load->helper('language');
         $this->load->model(array('general_model'));
-        $this->load->database();
+        $this->load->database(get_db_config());
         $this->configs = $this->general_model->configs();
     }
 

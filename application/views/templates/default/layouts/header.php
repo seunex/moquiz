@@ -75,6 +75,7 @@
 <body class="overall-body">
 <div class="container-wrapper header" style="background: <?php //echo config('background-color','#DCD2F0') ?>">
     <div class="container">
+        <?php if(!is_install()): ?>
         <nav class="navbar navbar-light bg-light-quiz pr-0 pl-0" style="background: <?php //echo config('background-color','#DCD2F0') ?>">
             <a class="navbar-brand" href="<?php echo url(''); ?>">
                 <?php echo config('website-title', 'FriendsQuizzy'); ?>
@@ -83,6 +84,7 @@
             <div class="top-corner-button navbar-text">
 
                 <?php if (!isLoggedIn()): ?>
+
                     <a style="background : "
                        href=""
                        onclick="return Moquiz.toggleAccountCreateBtn(this)"
@@ -126,6 +128,7 @@
                 </div>
             </div>
         </nav>
+        <?php endif; ?>
         <?php if (config('ads-code')): ?>
             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <?php echo config('ads-code'); ?>

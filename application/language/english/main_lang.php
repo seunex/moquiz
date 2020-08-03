@@ -205,5 +205,11 @@ $lang['home'] = "Home";
 $lang['profile'] = "Profile";
 $lang['admin_panel'] = "Admin Panel";
 $lang['logout'] = "Logout";
-
-
+//updated
+$lang['installation'] = "Installation";
+$lang['continue'] = "Continue";
+$lang['username-already-exists'] = "Username already exists";
+$lang['email-already-exists'] = "Email Address Already exists";
+$lang['congratulations'] = "Congratulations! ";
+$lang['your-installation-is-now-complete'] = "Your installation is now complete.";
+$lang['visit-site'] = "Visit site";

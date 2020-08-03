@@ -169,10 +169,10 @@ class Auth extends CI_Controller {
 	public function register(){
         //var_dump('here');
         //set rules
-        $this->form_validation->set_rules('full_name','Full Name','required|trim');
-        $this->form_validation->set_rules('username','User Name','required|trim|alpha_numeric|min_length[3]|callback_check_username');
-        $this->form_validation->set_rules('email_address','Email Address','required|trim|valid_email|callback_check_email');
-        $this->form_validation->set_rules('password','password','required|min_length[5]');
+        $this->form_validation->set_rules('full_name',lang('full_name'),'required|trim');
+        $this->form_validation->set_rules('username',lang('username'),'required|trim|alpha_numeric|min_length[3]|callback_check_username');
+        $this->form_validation->set_rules('email_address',lang('email_address'),'required|trim|valid_email|callback_check_email');
+        $this->form_validation->set_rules('password',lang('password'),'required|min_length[5]');
 
         if($this->form_validation->run()){
             //form success
@@ -208,7 +208,7 @@ class Auth extends CI_Controller {
         if($result == 0)
             $response = true;
         else {
-            $this->form_validation->set_message('check_username', 'Username already exists');
+            $this->form_validation->set_message('check_username', lang('username-already-exists'));
             $response = false;
         }
         return $response;
@@ -219,7 +219,7 @@ class Auth extends CI_Controller {
         if($result == 0){
             return true;
         }else{
-            $this->form_validation->set_message('check_email','Email Address Already exists');
+            $this->form_validation->set_message('check_email',lang('email-already-exists'));
             return false;
         }
     }

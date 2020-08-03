@@ -11,7 +11,7 @@ class Quiz extends CI_Controller
         $this->load->library(array('layouts', 'session','pagination'));
         $this->load->language('main');
         $this->load->helper(array('language', 'quiz'));
-        $this->load->database();
+        $this->load->database(get_db_config());
         //load settings now
         $this->load->model(array('general_model', 'quiz_model'));
         $this->configs = $this->general_model->configs();
