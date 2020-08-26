@@ -23,7 +23,52 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/moquiz';
+function server($name, $default = null) {
+    if(isset($_SERVER[$name])) return $_SERVER[$name];
+    return $default;
+}
+
+function getRoot() {
+    $base = getBase();
+
+    return getScheme().'://'.getHost().$base;
+}
+
+function getBase() {
+    $filename = basename(server('SCRIPT_FILENAME'));
+    if(basename(server('SCRIPT_NAME')) == $filename) {
+        $baseUrl = server('SCRIPT_NAME');
+    } elseif(basename(server('PHP_SELF')) == $filename) {
+        $baseUrl = server('PHP_SELF');
+    } elseif(basename(server('ORIG_SCRIPT_NAME')) == $filename) {
+        $baseUrl = server('ORIG_SCRIPT_NAME');
+    } else {
+        $baseUrl = server('SCRIPT_NAME');
+    }
+
+    $baseUrl = preg_replace('/index\.php/i', '', $baseUrl);
+
+    return $baseUrl;
+}
+function getScheme() {
+    //return (App::getInstance()->sslEnabled()) ? 'https' : 'http';
+    return ($_SERVER['SERVER_PORT'] == 443) ? "https" : "http";
+}
+
+function getHost() {
+    $request = $_SERVER;
+    $host = (isset($request['HTTP_HOST'])) ? $request['HTTP_HOST'] : $request['SERVER_NAME'];
+
+    //remove unwanted characters
+    $host = strtolower(preg_replace('/:\d+$/', '', trim($host)));
+    //prevent Dos attack
+    if($host && '' !== preg_replace('/(?:^\[)?[a-zA-Z0-9-:\]_]+\.?/', '', $host)) {
+        die();
+    }
+
+    return $host;
+}
+$config['base_url'] = getRoot();
 
 /*
 |--------------------------------------------------------------------------

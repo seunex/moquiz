@@ -5,7 +5,7 @@ return array(
      */
     'db-host-name' => 'localhost',
     'db-user-name' => 'root',
-    'db-name' => 'testing_f_installer',
+    'db-name' => 'friends_quiz',
     'db-password' => 'pass',
 
     'installed'=> '0',

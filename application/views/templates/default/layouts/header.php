@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:site_name" content="Crea8Social"/>
+    <meta property="og:site_name" content="<?php echo $title; ?>"/>
     <meta property="og:title" content="<?php echo $title ?>"/>
     <meta name="twitter:title" content="<?php echo $title ?>"/>
     <meta itemprop="headline" content="<?php echo $title ?>"/>
@@ -20,6 +20,7 @@
     <meta name="twitter:card" content="summary_large_image"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="icon" href="<?php echo asset_url().'default/img/favicon.ico' ?>" type="image/gif" sizes="16x16">
 
     <link rel="stylesheet" type="text/css" href="<?php echo asset_url() . 'default' . '/css/custom.min.css' ?>"/>
     <link rel="stylesheet" type="text/css" href="<?php echo asset_url() . 'default' . '/css/overrides.css' ?>"/>

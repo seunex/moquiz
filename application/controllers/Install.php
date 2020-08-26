@@ -114,6 +114,8 @@ class Install extends CI_Controller
 
     protected function register_user($data){
         $data['created_at'] = time();
+        $data['updated_at'] = time();
+        $data['avatar'] = '';
         $id = $this->user_model->insert($data);
         $this->session->set_userdata('id',$id);
         $user = $this->user_model->find_user($id);

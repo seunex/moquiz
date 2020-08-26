@@ -10,7 +10,7 @@ class Auth extends CI_Controller {
         $this->load->model(array('user_model','general_model'));
         $this->load->helper('language');
         $this->load->language('main');
-        $this->load->database();
+        $this->load->database(get_db_config());
         $this->configs = $this->general_model->configs();
     }
 
@@ -191,6 +191,8 @@ class Auth extends CI_Controller {
 
     protected function register_user($data){
         $data['created_at'] = time();
+        $data['updated_at'] = time();
+        $data['avatar'] = '';
         $id = $this->user_model->insert($data);
         $this->session->set_userdata('id',$id);
         $user = $this->user_model->find_user($id);
