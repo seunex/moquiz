@@ -205,5 +205,11 @@ $lang['home'] = "الصفحة الرئيسية";
 $lang['profile'] = "الملف الشخصي";
 $lang['admin_panel'] = "لوحة الادارة";
 $lang['logout'] = "تسجيل خروج";
-
-
+//updated
+$lang['installation'] = "Installation";
+$lang['continue'] = "Continue";
+$lang['username-already-exists'] = "Username already exists";
+$lang['email-already-exists'] = "Email Address Already exists";
+$lang['congratulations'] = "Congratulations! ";
+$lang['your-installation-is-now-complete'] = "Your installation is now complete.";
+$lang['visit-site'] = "Visit site";
