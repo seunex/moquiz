@@ -53,8 +53,10 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
-	//define('ENVIRONMENT', 'production');
+	//define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
+	define('ENVIRONMENT', 'production');
+	define('DEMO', false);
+	define('DEMO_MSG', 'Our Demo Reset Every 24hours. Administrative configurations and account changes will not be saved. Thanks');
 
 /*
  *---------------------------------------------------------------

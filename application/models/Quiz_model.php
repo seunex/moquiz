@@ -37,6 +37,25 @@ class Quiz_model extends CI_Model
         return $query->result_array();
     }
 
+    function quiz_count_questions($quiz_id)
+    {
+        $query = $this->db->select('*')
+            ->from('quiz_questions')
+            ->where('quiz_id', $quiz_id)
+            ->get();
+            return $query->num_rows();
+    }
+
+    function has_participated($quiz_id,$uid = null)
+    {
+        $query = $this->db->select('*')
+            ->from('quiz_result_overall')
+            ->where('quiz_id', $quiz_id)
+            ->where('user_id', $uid)
+            ->get();
+            return $query->num_rows();
+    }
+
     function get_quiz($type = 'mine', $limit = 3, $offset = 0)
     {
         switch ($type) {

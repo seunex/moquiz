@@ -46,8 +46,11 @@
         </div>
     <?php else: ?>
         <div class="title-noquiz-wrapper">
-            <h6 class="title-noquiz"><?php echo lang('you_have_no_quiz_yet') ?> <a
-                        href="<?php echo site_url('quiz/create') ?>"> <?php echo lang('create_quiz_now') ?></a></h6>
+            <h6 class="title-noquiz"><?php echo lang('you_have_no_quiz_yet') ?>
+                <?php if(can_create_quiz()): ?>
+                    <a href="<?php echo site_url('quiz/create') ?>"> <?php echo lang('create_quiz_now') ?></a>
+                <?php endif; ?>
+            </h6>
 
             <div class="icon-wrapper"> <i data-feather="cloud-snow"></i></div>
         </div>

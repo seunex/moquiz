@@ -35,9 +35,9 @@ class Quiz extends CI_Controller
 
             $config['upload_path'] = './storage/';
             $config['allowed_types'] = 'gif|jpg|png|jpeg';
-            $config['max_size'] = 100;
-            $config['max_width'] = 1024;
-            $config['max_height'] = 768;
+            //$config['max_size'] = 100;
+            //$config['max_width'] = 1024;
+            //$config['max_height'] = 768;
 
 
             $path0 = 'storage/uploads/' . $qid . '/';
@@ -165,9 +165,12 @@ class Quiz extends CI_Controller
 
         } else {
             if (!isLoggedIn()) redirect(site_url());
-            $this->layouts->set_title(lang('create_a_quiz'));
-            $this->layouts->view('templates/default/quiz/create', array(), array(), true, true, array('active' => 'create-quiz'));
-
+            if(config('allow-members-create-quiz', 1) || is_admin()){
+                $this->layouts->set_title(lang('create_a_quiz'));
+                $this->layouts->view('templates/default/quiz/create', array(), array(), true, true, array('active' => 'create-quiz'));
+            }else{
+                redirect(site_url());
+            }
         }
 
     }
@@ -187,7 +190,7 @@ class Quiz extends CI_Controller
     }
 
 
-    public function share($id)
+    public function share($id = null)
     {
         if (!isLoggedIn()) redirect(site_url());
         //if (!get_session('quiz_id')) redirect(site_url());
@@ -204,9 +207,15 @@ class Quiz extends CI_Controller
         $this->layouts->set_title(lang('take_quiz'));
         $user = find_user($quiz['user_id']);
         $questions = $this->quiz_model->get_questions($quiz['id']);
-        $url = current_url();
-        $this->session->set_userdata('redirect_url', $url);
-        return $this->layouts->view('templates/default/quiz/start', array(), array('quiz' => $quiz, 'user' => $user, 'questions' => $questions), true, false, array('active' => 'create-quiz'));
+        if(!isLoggedIn()){
+            $url = current_url();
+            $this->session->set_userdata('redirect_url', $url);
+        }
+        if(has_taken_quiz($quiz)){
+            return $this->layouts->view('templates/default/quiz/already-participated', array(), array('quiz' => $quiz, 'user' => $user, 'questions' => $questions), true, false, array('active' => 'create-quiz'));
+        }else{
+            return $this->layouts->view('templates/default/quiz/start', array(), array('quiz' => $quiz, 'user' => $user, 'questions' => $questions), true, false, array('active' => 'create-quiz'));
+        }
     }
 
     function take()
@@ -222,7 +231,8 @@ class Quiz extends CI_Controller
             $time = time();
 
             if (is_array($answers)) {
-                $question_count = count($answers);
+                //$question_count = count($answers);
+                $question_count = quiz_count_questions($quiz_id);
                 foreach ($answers as $q_id => $answer) {
                     $arr = array();
                     $arr['time'] = $time;
@@ -294,6 +304,7 @@ class Quiz extends CI_Controller
                         'user_id' =>$user_id,
                         'time'=>$time
                     );
+                    //var_dump($arr1);die('here again');
                     $this->quiz_model->quiz_result_by_question($arr1);
                 }
             }

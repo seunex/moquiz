@@ -206,10 +206,23 @@ $lang['profile'] = "الملف الشخصي";
 $lang['admin_panel'] = "لوحة الادارة";
 $lang['logout'] = "تسجيل خروج";
 //updated
-$lang['installation'] = "Installation";
-$lang['continue'] = "Continue";
-$lang['username-already-exists'] = "Username already exists";
-$lang['email-already-exists'] = "Email Address Already exists";
-$lang['congratulations'] = "Congratulations! ";
-$lang['your-installation-is-now-complete'] = "Your installation is now complete.";
-$lang['visit-site'] = "Visit site";
+$lang['installation'] = "التركيب";
+$lang['continue'] = "استمر";
+$lang['username-already-exists'] = "اسم المستخدم موجود بالفعل";
+$lang['email-already-exists'] = "عنوان البريد الإلكتروني موجود بالفعل";
+$lang['congratulations'] = "تهانينا! ";
+$lang['your-installation-is-now-complete'] = "التثبيت اكتمل الآن.";
+$lang['visit-site'] = "تفضل بزيارة الموقع";
+$lang['you_already_took_this_quiz'] = "لقد أخذت هذا الاختبار بالفعل.";
+$lang['see-quiz-results-here'] = "انظر نتائج الاختبار هنا";
+$lang['allow-members-create-quiz'] = "السماح للأعضاء بإنشاء مسابقة؟";
+$lang['enable-dark-mode-feature'] = "تمكين ميزة الوضع الليلي";
+//now
+$lang['create-your-quiz'] = "قم بإنشاء اختبارك";
+$lang['create-your-quiz-intro'] = "قم بعمل اختبار خاص بك - قم بإنشاء أسئلة مضحكة عن نفسك. يمكنك استخدام أمثلتنا أو كتابة أسئلتك وإجاباتك.";
+$lang['share-with-your-friends'] = "شارك الموضوع مع أصدقائك";
+$lang['share-with-your-friends-intro'] = "بعد الإجابة على جميع الأسئلة ، ستحصل على رابط للاختبار الخاص بك. شاركها مع أصدقائك على Whatsapp و Twitter و Facebook.";
+$lang['see-their-results'] = "انظر نتائجهم";
+$lang['see-their-results-intro'] = "سيحاول أصدقاؤك الإجابة على أسئلتك ويمكنك التحقق من النتيجة على لوحة النتائج. يتم فرز النتائج من أعلى إلى أسفل.";
+
+

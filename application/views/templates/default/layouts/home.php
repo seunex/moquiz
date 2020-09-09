@@ -23,22 +23,19 @@
         <div class="container p-0 mb-5">
             <div class="row landing-page-intro">
                 <div class="col-4 landing-page-intro__box">
-                    <h5 class="landing-page-intro__box__title"><span> Create your quiz </span></h5>
-                    <p class="landing-page-intro__box__desc">Make your own quiz - create  funny questions about yourself.
-                        You can use our examples or write your own questions and answers.</p>
+                    <h5 class="landing-page-intro__box__title"><span> <?php echo lang('create-your-quiz'); ?> </span></h5>
+                    <p class="landing-page-intro__box__desc"><?php echo lang('create-your-quiz-intro') ?></p>
 
                     <p class="text-center"><img style="height: 40px" src="<?php echo asset_url('default/img/emoticons/winking_eye.svg') ?>" alt="😜"/></p>
                 </div>
                 <div class="col-4 landing-page-intro__box border-left-0">
-                    <h5 class="landing-page-intro__box__title"><span> Share with your friends</span></h5>
-                    <p class="landing-page-intro__box__desc">After answering all the questions you'll get a link to your quiz.
-                        Share it with your friends on Whatsapp,Twitter,Facebook.</p>
+                    <h5 class="landing-page-intro__box__title"><span><?php echo lang('share-with-your-friends'); ?></span></h5>
+                    <p class="landing-page-intro__box__desc"><?php echo lang('share-with-your-friends-intro') ?></p>
                     <p class="text-center"><img style="height: 40px" src="<?php echo asset_url('default/img/emoticons/sunglass.svg') ?>" alt="😜"/></p>
                 </div>
                 <div class="col-4 landing-page-intro__box border-left-0">
-                    <h5 class="landing-page-intro__box__title"><span>See their results</span></h5>
-                    <p class="landing-page-intro__box__desc">Your friends will try to answer your questions and you can check the result on the scoreboard.
-                        Results are sorted from top to bottom. </p>
+                    <h5 class="landing-page-intro__box__title"><span><?php echo lang('see-their-results'); ?></span></h5>
+                    <p class="landing-page-intro__box__desc"><?php echo lang('see-their-results-intro') ?></p>
                     <p class="text-center"><img style="height: 40px" src="<?php echo asset_url('default/img/emoticons/thumbsup.svg') ?>" alt="😜"/></p>
                 </div>
             </div>

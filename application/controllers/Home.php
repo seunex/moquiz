@@ -15,6 +15,15 @@ class Home extends CI_Controller {
         $this->configs = $this->general_model->configs();
     }
 
+    public function mode($type = null)
+    {
+        $expected = array('dark','light');
+        if(in_array($type,$expected)){
+            session_put('active_mode',$type);
+        }
+        return false;
+    }
+
     public function index($count =1)
 	{
 	    if(!isLoggedIn()) redirect(site_url());

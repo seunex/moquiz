@@ -15,9 +15,12 @@ class Account extends CI_Controller
         $this->configs = $this->general_model->configs();
     }
 
+    /**
+     * @param $uid
+     */
     public function delete($uid){
         if(!isLoggedIn()) return redirect(site_url());
-        if(md5(get_user_name()) == $uid){
+        if(md5(get_user_name()) == $uid && !DEMO){
             $uid = user_id();
             $quizzes = $this->quiz_model->get_quiz('mine',10000,0);
             if($quizzes){
@@ -36,9 +39,8 @@ class Account extends CI_Controller
         $this->form_validation->set_rules('full_name', lang('full_name'), 'required|trim');
         $this->form_validation->set_rules('username', lang('username'), 'required|trim|alpha_numeric|min_length[3]|callback_check_username');
         $this->form_validation->set_rules('email_address', lang('email_address'), 'required|trim|valid_email|callback_check_email');
-        //$this->form_validation->set_rules('password','password','required|min_length[5]');
 
-        if ($this->form_validation->run()) {
+        if ($this->form_validation->run() && !DEMO) {
             //form success
             $msg = '';
             $user = get_user();
@@ -96,7 +98,7 @@ class Account extends CI_Controller
         $q_image_file_name = md5(  uniqid().time() ); //new name
         $config['upload_path'] = './storage/';
         $config['allowed_types'] = 'gif|jpg|png|jpeg';
-        $config['max_size'] = 10000;
+        //$config['max_size'] = 10000;
         //$config['max_width'] = 1024;
         //$config['max_height'] = 768;
 

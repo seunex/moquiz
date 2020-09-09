@@ -277,10 +277,12 @@ function get_active_lang(){
 
 function input($name,$type = 'post', $xss = true,$default = null){
     $CI = get_instance();
-    //$CI->load->libary('form_validation');
     $value = $default;
     if($type == 'post'){
         $value = $CI->input->post($name,$xss);
+    }
+    if($type == 'get'){
+        $value = $CI->input->get($name,$xss);
     }
     return $value;
 }
@@ -332,4 +334,20 @@ function get_db_config(){
     $config['dbdriver'] = 'mysqli';
     $config['db_debug'] = false;
     return $config;
+}
+
+function get_quiz_url($quiz){
+    return site_url('quiz/start/'.$quiz['slug']);
+}
+
+function get_outcome_url($quiz){
+    return site_url('quiz/scoreboard/'.$quiz['id']);
+}
+
+function active_mode($default = 'light'){
+    return (session_get('active_mode',null)) ? session_get('active_mode') : $default;
+}
+
+function can_create_quiz(){
+    return (config('allow-members-create-quiz', 1) || is_admin()) ? true : false;
 }

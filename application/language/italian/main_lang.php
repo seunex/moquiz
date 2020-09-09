@@ -189,7 +189,7 @@ $lang['september'] = "settembre";
 $lang['october'] = "ottobre";
 $lang['november'] = "novembre";
 $lang['december'] = "dicembre";
-$lang['user-statistics'] = "STATISTICHE DELL'UTENTE";
+$lang['user-statistics'] = "STATISTICHE DELL UTENTE";
 $lang['quiz-statistics'] = "STATISTICHE DEL QUIZ";
 $lang['participants-statistics'] = "STATISTICA DEI PARTECIPANTI";
 $lang['user'] = "Utente registrato";
@@ -205,5 +205,24 @@ $lang['home'] = "Casa";
 $lang['profile'] = "Profilo";
 $lang['admin_panel'] = "Pannello di Amministrazione";
 $lang['logout'] = "Disconnettersi";
+//updated
+$lang['installation'] = "Installazione";
+$lang['continue'] = "Continua";
+$lang['username-already-exists'] = "Il nome utente esiste già";
+$lang['email-already-exists'] = "L'indirizzo email è già esistente";
+$lang['congratulations'] = "Congratulations! ";
+$lang['your-installation-is-now-complete'] = "La tua installazione è ora completa.";
+$lang['visit-site'] = "Visita il sito";
+$lang['you_already_took_this_quiz'] = "Hai già risposto a questo quiz.";
+$lang['see-quiz-results-here'] = "Vedi i risultati del quiz qui";
+$lang['allow-members-create-quiz'] = "Consentire ai membri di creare quiz?";
+$lang['enable-dark-mode-feature'] = "Abilita la funzione modalità notturna";
+//now
+$lang['create-your-quiz'] = "Crea il tuo quiz";
+$lang['create-your-quiz-intro'] = "Crea il tuo quiz: crea domande divertenti su di te. Puoi usare i nostri esempi o scrivere le tue domande e risposte.";
+$lang['share-with-your-friends'] = "condividi con i tuoi amici";
+$lang['share-with-your-friends-intro'] = "Dopo aver risposto a tutte le domande, riceverai un link al tuo quiz. Condividilo con i tuoi amici su Whatsapp, Twitter, Facebook.";
+$lang['see-their-results'] = "Guarda i loro risultati";
+$lang['see-their-results-intro'] = "I tuoi amici proveranno a rispondere alle tue domande e potrai controllare il risultato sul tabellone. I risultati vengono ordinati dall'alto verso il basso.";
 
 

@@ -205,5 +205,24 @@ $lang['home'] = "Accueil";
 $lang['profile'] = "Profil";
 $lang['admin_panel'] = "panneau d'administration";
 $lang['logout'] = "Se déconnecter";
+//updated
+$lang['installation'] = "Installation";
+$lang['continue'] = "Continuer";
+$lang['username-already-exists'] = "Ce nom d'utilisateur existe déjà";
+$lang['email-already-exists'] = "L'adresse mail existe déjà";
+$lang['congratulations'] = "Toutes nos félicitations! ";
+$lang['your-installation-is-now-complete'] = "Votre installation est maintenant terminée.";
+$lang['visit-site'] = "Visitez le site";
+$lang['you_already_took_this_quiz'] = "Vous avez déjà répondu à ce quiz.";
+$lang['see-quiz-results-here'] = "Voir les résultats du quiz ici";
+$lang['allow-members-create-quiz'] = "Autoriser les membres à créer un quiz?";
+$lang['enable-dark-mode-feature'] = "Activer la fonction du mode nuit";
+//now
+$lang['create-your-quiz'] = "Créez votre quiz";
+$lang['create-your-quiz-intro'] = "Faites votre propre quiz - créez des questions amusantes sur vous-même. Vous pouvez utiliser nos exemples ou rédiger vos propres questions et réponses.";
+$lang['share-with-your-friends'] = "Partage avec tes amis";
+$lang['share-with-your-friends-intro'] = "Après avoir répondu à toutes les questions, vous obtiendrez un lien vers votre quiz. Partagez-le avec vos amis sur Whatsapp, Twitter, Facebook.";
+$lang['see-their-results'] = "Voir leurs résultats";
+$lang['see-their-results-intro'] = "Vos amis essaieront de répondre à vos questions et vous pourrez vérifier le résultat sur le tableau de bord. Les résultats sont triés de haut en bas.";
 
 

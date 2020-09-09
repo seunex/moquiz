@@ -4,7 +4,7 @@
 
             <img src="<?php echo get_avatar($user) ?>" class="avatar-start-quiz"/>
 
-            <h4 class="made-for-you-title"><?php echo get_user_name($user) ?><?php echo lang('made_a_quiz_named'); ?></h4>
+            <h4 class="made-for-you-title"><?php echo get_user_name($user) ?> <?php echo lang('made_a_quiz_named'); ?></h4>
             <h4 class="quiz-start-title">"<?php echo quiz_data('title', $quiz); ?>"</h4>
 
             <?php /*if (config('take-quiz-with-name-only', 0)): */ ?>
@@ -18,16 +18,6 @@
                                     class="q-start-count">1</span> </b></span>
                 </div>
                 <?php $this->view('templates/default/quiz/list/questions', array('questions' => $questions, 'quiz' => $quiz)); ?>
-                <!--<div class="form-holder-for-just-name" style="display: none">
-                    <div class="form-group">
-                        <label class="label-input-name"><?php /*echo lang('your_name') */ ?></label>
-                        <input type="text" name="first_name" placeholder="<?php /*echo lang('your_name') */ ?>"
-                               class="form-control form-control-lg form-round"/>
-                    </div>
-                    <button class="btn btn-info btn-lg"
-                            style="background: <?php /*echo config('btn-action-color', '#FF088F'); */ ?>"><i
-                                data-feather="edit"></i> <?php /*echo lang('take_quiz') */ ?> </button>
-                </div><br/><br/>-->
             <?php else: ?>
                 <div class="social-login-wrapper">
                     <div class="container">

@@ -20,7 +20,7 @@
     <meta name="twitter:card" content="summary_large_image"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <link rel="icon" href="<?php echo asset_url().'default/img/favicon.ico' ?>" type="image/gif" sizes="16x16">
+    <link rel="icon" href="<?php echo asset_url() . 'default/img/favicon.ico' ?>" type="image/gif" sizes="16x16">
 
     <link rel="stylesheet" type="text/css" href="<?php echo asset_url() . 'default' . '/css/custom.min.css' ?>"/>
     <link rel="stylesheet" type="text/css" href="<?php echo asset_url() . 'default' . '/css/overrides.css' ?>"/>
@@ -36,7 +36,7 @@
     <style>
         body,
         .container-wrapper.header,
-        .bg-light-quiz{
+        .bg-light-quiz {
             background: <?php echo config('background-color','#DCD2F0') ?>;
             background-image: url("<?php echo asset_url('default/img/bg/bg-01.svg') ?>");
         }
@@ -55,6 +55,7 @@
             border-color: <?php echo config('btn-action-color', '#FF088F');?> !important;;
         }
     </style>
+    <link rel="stylesheet" type="text/css" href="<?php echo asset_url() . 'default' . '/css/dark.css' ?>"/>
     <?php if (config('website-google-analytics')): ?>
         <script>
             (function (i, s, o, g, r, a, m) {
@@ -73,68 +74,85 @@
         </script>
     <?php endif; ?>
 </head>
-<body class="overall-body">
+<body class="overall-body <?php echo active_mode(); ?>">
 <div class="container-wrapper header" style="background: <?php //echo config('background-color','#DCD2F0') ?>">
     <div class="container">
-        <?php if(!is_install()): ?>
-        <nav class="navbar navbar-light bg-light-quiz pr-0 pl-0" style="background: <?php //echo config('background-color','#DCD2F0') ?>">
-            <a class="navbar-brand" href="<?php echo url(''); ?>">
-                <?php echo config('website-title', 'FriendsQuizzy'); ?>
-            </a>
+        <?php if (!is_install()): ?>
+            <nav class="navbar navbar-light bg-light-quiz pr-0 pl-0"
+                 style="background: <?php //echo config('background-color','#DCD2F0') ?>">
+                <a class="navbar-brand" href="<?php echo url(''); ?>">
+                    <?php echo config('website-title', 'FriendsQuizzy'); ?>
+                </a>
 
-            <div class="top-corner-button navbar-text">
+                <div class="top-corner-button navbar-text">
+                    <?php if (config('enable-dark-mode-feature', 1)): ?>
+                        <a href="" class="border-0" onclick="return toggle_dark_mode(this)"><i data-feather="moon"></i></a>
+                    <?php endif; ?>
 
-                <?php if (!isLoggedIn()): ?>
+                    <?php if (!isLoggedIn()): ?>
 
-                    <a style="background : "
-                       href=""
-                       onclick="return Moquiz.toggleAccountCreateBtn(this)"
-                       data-ltext="<?php echo lang('login') ?>"
-                       data-ctext="<?php echo lang('create_new_account') ?>"
-                       class="btn-action btn-border"> <?php echo lang('create_new_account') ?>
-                    </a>
-                <?php else: ?>
-                    <span class="language-banner">
-                      <?php echo lang('hi') ?> <?php echo ucfirst(get_user_full_name()) ?>
-                </span>
-                <?php endif; ?>
-
-                <div class="language-banner dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown"><i
-                                data-feather="map"></i><?php //echo get_active_lang(); ?></a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="<?php echo language_url('english') ?>">English <img alt="english"
-                                                                                                           class="pull-right"
-                                                                                                           src="<?php echo asset_url('default/img/flags/us.png'); ?>"/>
+                        <a style="background : "
+                           href=""
+                           onclick="return Moquiz.toggleAccountCreateBtn(this)"
+                           data-ltext="<?php echo lang('login') ?>"
+                           data-ctext="<?php echo lang('create_new_account') ?>"
+                           class="btn-action btn-border"> <?php echo lang('create_new_account') ?>
                         </a>
-                        <a class="dropdown-item" href="<?php echo language_url('french') ?>">Français <img alt="english"
-                                                                                                           class="pull-right"
-                                                                                                           src="<?php echo asset_url('default/img/flags/fr.png'); ?>"/></a>
-                        <a class="dropdown-item" href="<?php echo language_url('japanese') ?>">japəˈnēz <img
-                                    alt="english" class="pull-right"
-                                    src="<?php echo asset_url('default/img/flags/jp.png'); ?>"/></a>
-                        <a class="dropdown-item" href="<?php echo language_url('italian') ?>">Italiano <img
-                                    alt="english" class="pull-right"
-                                    src="<?php echo asset_url('default/img/flags/it.png'); ?>"/></a>
-                        <a class="dropdown-item" href="<?php echo language_url('portuguese') ?>">Português <img
-                                    alt="english" class="pull-right"
-                                    src="<?php echo asset_url('default/img/flags/br.png'); ?>"/></a>
-                        <a class="dropdown-item" href="<?php echo language_url('spanish') ?>">Español <img alt="english"
-                                                                                                           class="pull-right"
-                                                                                                           src="<?php echo asset_url('default/img/flags/es.png'); ?>"/></a>
-                        <a class="dropdown-item" href="<?php echo language_url('arabic') ?>"> عربى <img alt="english"
-                                                                                                        class="pull-right"
-                                                                                                        src="<?php echo asset_url('default/img/flags/sa.png'); ?>"/></a>
+                    <?php else: ?>
+                        <span class="language-banner">
+                      <?php echo lang('hi') ?><?php echo ucfirst(get_user_full_name()) ?>
+                </span>
+                    <?php endif; ?>
+
+                    <div class="language-banner dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown"><i
+                                    data-feather="map"></i><?php //echo get_active_lang(); ?></a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="<?php echo language_url('english') ?>">English <img
+                                        alt="english"
+                                        class="pull-right"
+                                        src="<?php echo asset_url('default/img/flags/us.png'); ?>"/>
+                            </a>
+                            <a class="dropdown-item" href="<?php echo language_url('french') ?>">Français <img
+                                        alt="english"
+                                        class="pull-right"
+                                        src="<?php echo asset_url('default/img/flags/fr.png'); ?>"/></a>
+                            <a class="dropdown-item" href="<?php echo language_url('japanese') ?>">japəˈnēz <img
+                                        alt="english" class="pull-right"
+                                        src="<?php echo asset_url('default/img/flags/jp.png'); ?>"/></a>
+                            <a class="dropdown-item" href="<?php echo language_url('italian') ?>">Italiano <img
+                                        alt="english" class="pull-right"
+                                        src="<?php echo asset_url('default/img/flags/it.png'); ?>"/></a>
+                            <a class="dropdown-item" href="<?php echo language_url('portuguese') ?>">Português <img
+                                        alt="english" class="pull-right"
+                                        src="<?php echo asset_url('default/img/flags/br.png'); ?>"/></a>
+                            <a class="dropdown-item" href="<?php echo language_url('spanish') ?>">Español <img
+                                        alt="english"
+                                        class="pull-right"
+                                        src="<?php echo asset_url('default/img/flags/es.png'); ?>"/></a>
+                            <a class="dropdown-item" href="<?php echo language_url('arabic') ?>"> عربى <img
+                                        alt="english"
+                                        class="pull-right"
+                                        src="<?php echo asset_url('default/img/flags/sa.png'); ?>"/></a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </nav>
-        <?php endif; ?>
-        <?php if (config('ads-code')): ?>
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <?php echo config('ads-code'); ?>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </nav>
         <?php endif; ?>
     </div>
 </div>
+<?php if (DEMO): ?>
+    <div class="container">
+        <div class="mb-2 d-block text-center font-14" style="">
+            <?php $this->view('templates/default/snippets/alert', array('message' => DEMO_MSG, 'type' => 'info')); ?>
+        </div>
+    </div>
+<?php endif; ?>
+<?php if (config('ads-code')): ?>
+    <div class="container">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <?php echo config('ads-code'); ?>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+<?php endif; ?>
 

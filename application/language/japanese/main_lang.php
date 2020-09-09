@@ -205,5 +205,24 @@ $lang['home'] = "ホーム";
 $lang['profile'] = "プロフィール";
 $lang['admin_panel'] = "管理パネル";
 $lang['logout'] = "ログアウト";
+//updated
+$lang['installation'] = "取り付け";
+$lang['continue'] = "継続する";
+$lang['username-already-exists'] = "ユーザー名は既に存在します";
+$lang['email-already-exists'] = "電子メールアドレスはすでに存在しています";
+$lang['congratulations'] = "おめでとう！ ";
+$lang['your-installation-is-now-complete'] = "これでインストールは完了です。";
+$lang['visit-site'] = "サイトに訪れる";
+$lang['you_already_took_this_quiz'] = "あなたはすでにこのクイズを受けました。";
+$lang['see-quiz-results-here'] = "ここでクイズの結果を参照してください";
+$lang['allow-members-create-quiz'] = "メンバーにクイズの作成を許可しますか？";
+$lang['enable-dark-mode-feature'] = "ナイトモード機能を有効にする";
+//now
+$lang['create-your-quiz'] = "クイズを作成する";
+$lang['create-your-quiz-intro'] = "独自のクイズを作成-自分について面白い質問を作成します。私たちの例を使用するか、独自の質問と回答を書くことができます。";
+$lang['share-with-your-friends'] = "友達とシェア";
+$lang['share-with-your-friends-intro'] = "すべての質問に答えると、クイズへのリンクが表示されます。 Whatsapp、Twitter、Facebookで友達と共有しましょう。";
+$lang['see-their-results'] = "結果を見る";
+$lang['see-their-results-intro'] = "友達があなたの質問に答えようとし、スコアボードで結果を確認できます。結果は上から下にソートされます。";
 
 

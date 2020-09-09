@@ -34,12 +34,12 @@ class Admincp extends CI_Controller
         $title = lang('custom-pages');
         $p = array();
         $show_add_btn = true;
-        if($type == 'delete'){
+        if($type == 'delete' && !DEMO){
             $pid = $this->input->get('id');
             $this->general_model->delete_page($pid);
             return redirect(url('admincp/pages'));
         }
-        if ($type == 'add') {
+        if ($type == 'add' && !DEMO) {
             $title = lang('add-page');
             $show_add_btn = false;
             $this->form_validation->set_rules('title', lang('page-title'), 'required|trim');
@@ -56,7 +56,7 @@ class Admincp extends CI_Controller
                 $msg = validation_errors();
             }
         }
-        if ($type == 'edit') {
+        if ($type == 'edit' && !DEMO) {
             $title = lang('edit-page');
             $show_add_btn = false;
             //if(!$pid) redirect(url('admincp/pages'));
@@ -90,10 +90,12 @@ class Admincp extends CI_Controller
         $this->layouts->set_title(lang('website-settings'));
         $settings = array();
         $msg = null;
-        if (input('website-title')) {
+        if (input('website-title') && !DEMO) {
             $val['website-title'] = input('website-title');
             $val['website-description'] = input('website-description');
             $val['website-keywords'] = input('website-keywords');
+            $val['allow-members-create-quiz'] = input('allow-members-create-quiz');
+            $val['enable-dark-mode-feature'] = input('enable-dark-mode-feature');
 
             //html purify
             //$clean_html = $purifier->purify($dirty_html);
@@ -131,7 +133,7 @@ class Admincp extends CI_Controller
     public function users($action = null, $uid = null)
     {
         if (!isLoggedIn()) return redirect(site_url());
-        if ($action == 'delete') {
+        if ($action == 'delete' && !DEMO) {
             //echo $action.$uid;die();
             delete_user($uid);
             redirect(site_url('admincp/users'));

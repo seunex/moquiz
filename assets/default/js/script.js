@@ -1,3 +1,11 @@
+function toggle_dark_mode(){
+    $('body').toggleClass('dark');
+    let status = ($('body').hasClass('dark')) ? 'dark' : 'light';
+    $.ajax({
+        url : base_url + 'home/mode/'+status,
+    });
+    return false;
+}
 function signup_with_email_modal() {
     $('#signupModal').modal('show');
     return false;
@@ -705,10 +713,13 @@ $(function () {
         } else if (t == 'twitter') {
             return window.open('https://twitter.com/share?url=' + encodeURI(url), title, 'width = 500, height = 500, scrollbars = yes')
         } else if (t == 'whatsapp') {
-            //whatsapp://send?text=The text to share!
             return window.open('https://api.whatsapp.com/send?text=' + encodeURI($('#content-to-share').val()), title, 'width = 500, height = 500, scrollbars = yes')
         } else if (t == 'embed') {
             return show_iframe(url, obj.data('img'));
+            return true;
+        } else if (t == 'view') {
+            window.location.href = url;
+            //return show_iframe(url, obj.data('img'));
             return true;
         }
         return false;

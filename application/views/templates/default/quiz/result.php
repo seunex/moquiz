@@ -16,10 +16,9 @@ if($o_score > 70){
         <img src="<?php echo get_avatar($user) ?>" class="avatar-start-quiz" />
         <h4 class="made-for-you-title"><em><?php echo get_user_name($user) ?></em> <?php echo lang('made_a_quiz_named'); ?></h4>
         <h4 class="quiz-start-title">"<?php echo quiz_data('title',$quiz); ?>"</h4>
-        <!--<h4 class=""><?php /*echo lang('quiz_title') */?> : <?php /*echo $quiz['title']; */?></h4>-->
         <p class="score-show <?php echo $o_score; ?>"><?php echo lang('score')  ?> : <?php echo $score; ?></p>
 
-        <a href="" class="btn btn-lg btn-action"><i data-feather="chevrons-left"></i> <?php echo lang('see_score_board') ?>  </a>
+        <a href="<?php echo get_outcome_url($quiz) ?>" class="btn btn-lg btn-action"><i data-feather="chevrons-left"></i> <?php echo lang('see_score_board') ?>  </a>
     </div>
     <div class="home-content no-padding-top">
         <?php foreach ($question_result as $k=>$qr):

@@ -213,3 +213,14 @@ $lang['email-already-exists'] = "Email Address Already exists";
 $lang['congratulations'] = "Congratulations! ";
 $lang['your-installation-is-now-complete'] = "Your installation is now complete.";
 $lang['visit-site'] = "Visit site";
+$lang['you_already_took_this_quiz'] = "You Already took this Quiz.";
+$lang['see-quiz-results-here'] = "See Quiz results here";
+$lang['allow-members-create-quiz'] = "Allow members to create Quiz?";
+$lang['enable-dark-mode-feature'] = "Enable Night mode feature";
+//now
+$lang['create-your-quiz'] = "Create your quiz";
+$lang['create-your-quiz-intro'] = "Make your own quiz - create  funny questions about yourself. You can use our examples or write your own questions and answers.";
+$lang['share-with-your-friends'] = "Share with your friends";
+$lang['share-with-your-friends-intro'] = "After answering all the questions you'll get a link to your quiz. Share it with your friends on Whatsapp,Twitter,Facebook.";
+$lang['see-their-results'] = "See their results";
+$lang['see-their-results-intro'] = "Your friends will try to answer your questions and you can check the result on the scoreboard. Results are sorted from top to bottom.";

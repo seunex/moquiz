@@ -52,3 +52,36 @@
         </div>
     </div>
 </div>
+<div class="form-group">
+    <div class="row">
+        <div class="col-4">
+            <label for="allow-members-create-quiz" class=" font-14"> <?php echo lang('allow-members-create-quiz') ?> </label>
+        </div>
+        <div class="col-8">
+            <label class="switch">
+                <input type="radio" name="allow-members-create-quiz"
+                       value="0" <?php echo (!config('allow-members-create-quiz', 1)) ? 'checked' : '' ?>/>
+                <input type="radio" name="allow-members-create-quiz"
+                       value="1" <?php echo (config('allow-members-create-quiz', 1)) ? 'checked' : '' ?>/>
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="row">
+        <div class="col-4">
+            <label for="enable-dark-mode-feature" class=" font-14"> <?php echo lang('enable-dark-mode-feature') ?> </label>
+        </div>
+        <div class="col-8">
+            <label class="switch">
+                <input type="radio" name="enable-dark-mode-feature"
+                       value="0" <?php echo (!config('enable-dark-mode-feature', 1)) ? 'checked' : '' ?>/>
+                <input type="radio" name="enable-dark-mode-feature"
+                       value="1" <?php echo (config('enable-dark-mode-feature', 1)) ? 'checked' : '' ?>/>
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </div>
+</div>

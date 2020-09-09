@@ -1,8 +1,5 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-function get_quiz_url($quiz){
-   return site_url('quiz/start/'.$quiz['slug']);
-}
 
 function quiz_data($key,$quiz){
     if(!$quiz) return false;
@@ -10,10 +7,21 @@ function quiz_data($key,$quiz){
 }
 
 function get_question_answers($question){
-    $qid = $question['id'];
+    if(is_array($question)){
+        $qid = $question['id'];
+    }else{
+        $qid = $question;
+    }
     $CI = get_instance();
     $CI->load->model('quiz_model');
     $answers = $CI->quiz_model->get_answers($qid);
+    return $answers;
+}
+
+function quiz_count_questions($qid){
+    $CI = get_instance();
+    $CI->load->model('quiz_model');
+    $answers = $CI->quiz_model->quiz_count_questions($qid);
     return $answers;
 }
 
@@ -23,6 +31,16 @@ function get_participants($quiz,$type = 'count'){
     $CI->load->model('quiz_model');
     $particpants = $CI->quiz_model->get_participants($quiz_id,$type);
     return $particpants;
+}
+
+function has_taken_quiz($quiz){
+    if(!isLoggedIn()) return false;
+    $quiz_id = $quiz['id'];
+    $CI = get_instance();
+    $CI->load->model('quiz_model');
+    $uid = user_id();
+    $paticipated = $CI->quiz_model->has_participated($quiz_id,$uid);
+    return $paticipated;
 }
 
 function find_quiz($quiz_id){
@@ -78,9 +96,11 @@ function answers_type($answers){
 function is_question_answer_correct($answer, $databaseAnswer){
     $is_correct =  false;
     foreach ($databaseAnswer as $a){
-        if ($databaseAnswer['id'] == $answer){
-            if($a['answer'] == 1){
-                $is_correct =  true;
+        if(isset($a['id'])){
+            if ($a['id'] == $answer){
+                if($a['answer'] == 1){
+                    $is_correct =  true;
+                }
             }
         }
     }

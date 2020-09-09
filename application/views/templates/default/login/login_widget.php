@@ -1,4 +1,9 @@
 <div class="login-widget-wrapper">
+    <?php if(DEMO): ?>
+        <p><b>Demo Login Information</b></p>
+        <p><em>Email Address</em> : test@mquizzy.com </p>
+        <p><em>Password </em> : 123456 </p>
+    <?php endif; ?>
     <form action="<?php echo key_to_url('login_auth') ?>" method="post">
         <?php echo form_input(array('type'=>'hidden','name'=>$this->security->get_csrf_token_name(),'value'=>$this->security->get_csrf_hash())) ?>
         <div class="form-group">
