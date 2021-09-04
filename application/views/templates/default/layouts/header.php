@@ -150,9 +150,11 @@
 <?php endif; ?>
 <?php if (config('ads-code')): ?>
     <div class="container">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <?php echo config('ads-code'); ?>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        <div class="mb-2 d-block text-center font-14" style="">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <?php echo config('ads-code'); ?>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
     </div>
 <?php endif; ?>
 

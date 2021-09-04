@@ -16,6 +16,10 @@ body.dark{
     color : #e4e6eb;
 }
 
+.dark .homepage-left-handside{
+    background-color: #e4e6eb !important;
+}
+
 .dark .answer-row-text-image,
 .dark .bg-ccc,
 .dark .top-admin-header{

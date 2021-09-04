@@ -2,7 +2,10 @@
     <div class="container">
         <div class="container-inner-landing-page">
             <div class="row">
-                <div class="col homepage-left-handside" style="background-image: url('<?php echo asset_url().'default/img/friendsq.jpeg'; ?>');"></div>
+                <div class="col homepage-left-handside" style="
+                        background-color: <?php echo config('btn-action-color', '#FF088F'); ?>;
+                        background-image: url('<?php echo asset_url('default/img/bg/bg-6.svg'); ?>');
+                        "></div>
                 <div class="col homepage-right-handside">
                     <div class="home-page-wrapper home-page-wrapper-text">
                         <h4><?php echo lang('see_who_know_you_best'); ?></h4>
