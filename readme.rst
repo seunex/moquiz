@@ -1,8 +1,8 @@
 Mquizzy is a viral quiz platform built with CodeIgniter.
 More details can be found in this URL -
 
-https://mquizzy.com
+http://104.248.235.62/
 
 # Demo
-https://demo.mquizzy.com/
+http://104.248.235.62/
 
